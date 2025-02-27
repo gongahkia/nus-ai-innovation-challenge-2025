@@ -26,16 +26,16 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gruvbox-bg text-gruvbox-fg">
-      <header className="bg-gruvbox-bg border-b-4 border-gruvbox-fg">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      <header className="bg-white shadow">
         <div className="container mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-2xl font-black text-gruvbox-fg">Balls Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Balls Dashboard</h1>
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
-              <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-gruvbox-red"></span>
+              <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
             </Button>
-            <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2 neobrutalist-button">
+            <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2">
               <LogOut className="h-4 w-4" />
               Logout
             </Button>
@@ -48,15 +48,15 @@ export default function Dashboard() {
           <div className="lg:w-3/4">
             <Tabs defaultValue="stock" value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid grid-cols-3 mb-6">
-                <TabsTrigger value="stock" className="neobrutalist-button flex items-center gap-2">
+                <TabsTrigger value="stock" className="flex items-center gap-2">
                   <Package className="h-4 w-4" />
                   Stock Management
                 </TabsTrigger>
-                <TabsTrigger value="pos" className="neobrutalist-button flex items-center gap-2">
+                <TabsTrigger value="pos" className="flex items-center gap-2">
                   <ScanLine className="h-4 w-4" />
                   POS Scanner
                 </TabsTrigger>
-                <TabsTrigger value="analytics" className="neobrutalist-button flex items-center gap-2">
+                <TabsTrigger value="analytics" className="flex items-center gap-2">
                   <BarChart3 className="h-4 w-4" />
                   Sales Analytics
                 </TabsTrigger>
