@@ -18,18 +18,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        gruvbox: {
-          bg: "#fbf1c7",
-          fg: "#3c3836",
-          red: "#cc241d",
-          green: "#98971a",
-          yellow: "#d79921",
-          blue: "#458588",
-          purple: "#b16286",
-          aqua: "#689d6a",
-          gray: "#7c6f64",
-          orange: "#d65d0e",
-        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
