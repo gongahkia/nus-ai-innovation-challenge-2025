@@ -1,4 +1,6 @@
 @tailwind base;
+
+@custom-variant dark (&:is(.dark *));
 @tailwind components;
 @tailwind utilities;
 
@@ -27,44 +29,63 @@
   }
 
   * {
-    border-color: hsl(var(--border)); /* Correct usage for border color */
+    border-color: hsl(var(--border));
   }
 
   body {
-      background-color: hsl(var(--background));
-      color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
-
 }
 
 @layer components {
   .neobrutalist-shadow {
-    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+    box-shadow: 4px 4px 0 hsl(var(--foreground));
   }
 
   .neobrutalist-button {
-    @apply font-bold py-2 px-4 border-4 border-foreground text-foreground transition-all duration-200;
-    background-color: hsl(var(--background)); /* Use var() here */
-    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+    font-weight: bold;
+    padding: 0.5rem 1rem; /* Roughly equivalent to py-2 px-4 */
+    border-width: 4px; /* Roughly equivalent to border-4 */
+    border-color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: all 0.2s ease-in-out;
+    box-shadow: 4px 4px 0 hsl(var(--foreground));
   }
 
   .neobrutalist-button:hover,
   .neobrutalist-button:active {
-    background-color: hsl(var(--primary)); /* Use var() here */
+    background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
     transform: translate(4px, 4px);
     box-shadow: none;
   }
 
   .neobrutalist-input {
-    @apply border-4 border-foreground text-foreground px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary;
-    background-color: hsl(var(--background)); /* Use var() here */
-    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+    border-width: 4px;
+    border-color: hsl(var(--foreground));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    padding: 0.5rem 1rem; /* Roughly equivalent to py-2 px-4 */
+    outline: none; /* Remove default outline */
+    box-shadow: 4px 4px 0 hsl(var(--foreground));
   }
 
   .neobrutalist-card {
-    background-color: hsl(var(--background)); /* Use var() here */
-    @apply border-4 border-foreground p-6;
-    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+    background-color: hsl(var(--background));
+    border-width: 4px;
+    border-color: hsl(var(--foreground));
+    padding: 1.5rem; /* Roughly equivalent to p-6 */
+    box-shadow: 4px 4px 0 hsl(var(--foreground));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
