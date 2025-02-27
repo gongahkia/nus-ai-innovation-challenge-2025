@@ -31,8 +31,10 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
   }
+
 }
 
 @layer components {
@@ -41,24 +43,28 @@
   }
 
   .neobrutalist-button {
-    @apply font-bold py-2 px-4 border-4 border-foreground bg-background text-foreground transition-all duration-200;
+    @apply font-bold py-2 px-4 border-4 border-foreground text-foreground transition-all duration-200;
+    background-color: hsl(var(--background)); /* Use var() here */
     box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
   }
 
   .neobrutalist-button:hover,
   .neobrutalist-button:active {
-    @apply bg-primary text-primary-foreground;
+    background-color: hsl(var(--primary)); /* Use var() here */
+    color: hsl(var(--primary-foreground));
     transform: translate(4px, 4px);
     box-shadow: none;
   }
 
   .neobrutalist-input {
-    @apply border-4 border-foreground bg-background text-foreground px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary;
+    @apply border-4 border-foreground text-foreground px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary;
+    background-color: hsl(var(--background)); /* Use var() here */
     box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
   }
 
   .neobrutalist-card {
-    @apply bg-background border-4 border-foreground p-6;
+    background-color: hsl(var(--background)); /* Use var() here */
+    @apply border-4 border-foreground p-6;
     box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
   }
 }
