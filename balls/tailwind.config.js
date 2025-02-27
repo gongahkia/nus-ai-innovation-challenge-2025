@@ -18,11 +18,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        border: "hsl(var(--border))", // Leave as is - OK
+        input: "hsl(var(--input))",   // Leave as is - OK
+        ring: "hsl(var(--ring))",     // Leave as is - OK
+        background: "hsl(var(--background))", // Leave as is - OK
+        foreground: "hsl(var(--foreground))", // Leave as is - OK
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -84,4 +84,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

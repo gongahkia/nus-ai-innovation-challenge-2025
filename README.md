@@ -41,5 +41,6 @@ Checkin on 7 March Friday
 
 ```console
 $ cd balls
-$ 
+$ npm i
+$ npm run dev
 ```
