@@ -36,3 +36,10 @@ WHEN IS DEADLINE
 
 Checkin on 7 March Friday 
 ```
+
+## Running the frontend
+
+```console
+$ cd balls
+$ 
+```
