@@ -11,13 +11,13 @@ const buttonVariants = cva(
       variant: {
         default: "neobrutalist-button",
         destructive:
-          "bg-gruvbox-red text-gruvbox-bg hover:bg-gruvbox-red/90 neobrutalist-shadow border-4 border-gruvbox-fg",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 neobrutalist-button border-4 border-foreground",
         outline:
-          "border-4 border-gruvbox-fg bg-gruvbox-bg hover:bg-gruvbox-yellow hover:text-gruvbox-fg neobrutalist-shadow",
+          "border-4 border-foreground bg-background hover:bg-accent hover:text-accent-foreground neobrutalist-button",
         secondary:
-          "bg-gruvbox-aqua text-gruvbox-bg hover:bg-gruvbox-aqua/80 neobrutalist-shadow border-4 border-gruvbox-fg",
-        ghost: "hover:bg-gruvbox-bg hover:text-gruvbox-fg",
-        link: "text-gruvbox-blue underline-offset-4 hover:underline",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 neobrutalist-button border-4 border-foreground",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4 py-2",
