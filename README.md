@@ -1,4 +1,5 @@
 ```txt
+———-—
 MOTTO: Bringing industry insights to your doorstep
 
 TARGET DEMOGRAPHIC: Small businesses (eg. Mama shop, Individual retail shops, F&B)
@@ -7,7 +8,7 @@ WHY LOYVERSE IS SHIT
 - We don't take customer data
 - We just take business general transaction data 
 
-VALUE PROP: 
+VALUE PROP
 - Plug and play solution that features many ways to feed the data into our system
 - Not invasive at all, little capital cost to adopt our system as comapred to existing competitors in the market
 - Personalised data analytics for businesses, they can save their inventory the first time and then hook everything like recording transactions to a single webapp, then prompt them when there's a lack of resources, analytics system should backend also consider factors like weather, season, locality, producer availability, social media
@@ -20,8 +21,7 @@ USER JOURNEY: For the company
 - We give you insights
 
 ———-—
-
-MANPOWER
+NOW WHAT DO?
 
 Item 2
 Backend + Model training: Kamiya, Jia Lin, Nichole
@@ -31,9 +31,16 @@ Item 1,3,4,5
 Astin
 Gabriel
 
-———- 
+———-—
+WHEN IS DEADLINE 
 
-DEADLINE 
+Checkin on 7 March Friday 
+```
 
-Checkin on 7 March
+## Running the frontend
+
+```console
+$ cd balls
+$ npm i
+$ npm run dev
 ```
