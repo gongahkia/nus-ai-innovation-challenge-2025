@@ -6,64 +6,59 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
-
     --card: 0 0% 100%;
     --card-foreground: 0 0% 0%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
-
     --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 0%;
-
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-
     --accent: 0 0% 96%;
     --accent-foreground: 0 0% 0%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 0 0% 0%;
     --input: 0 0% 0%;
     --ring: 0 0% 0%;
-
     --radius: 0rem;
   }
-}
 
-@layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border)); /* Correct usage for border color */
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
-.neobrutalist-shadow {
-  box-shadow: 4px 4px 0 theme("colors.foreground");
-}
+@layer components {
+  .neobrutalist-shadow {
+    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+  }
 
-.neobrutalist-button {
-  @apply font-bold py-2 px-4 border-4 border-foreground bg-background text-foreground transition-all duration-200 neobrutalist-shadow;
-}
+  .neobrutalist-button {
+    @apply font-bold py-2 px-4 border-4 border-foreground bg-background text-foreground transition-all duration-200;
+    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+  }
 
-.neobrutalist-button:hover,
-.neobrutalist-button:active {
-  @apply bg-primary text-primary-foreground;
-  transform: translate(4px, 4px);
-  box-shadow: none;
-}
+  .neobrutalist-button:hover,
+  .neobrutalist-button:active {
+    @apply bg-primary text-primary-foreground;
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
 
-.neobrutalist-input {
-  @apply border-4 border-foreground bg-background text-foreground px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary neobrutalist-shadow;
-}
+  .neobrutalist-input {
+    @apply border-4 border-foreground bg-background text-foreground px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary;
+    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+  }
 
-.neobrutalist-card {
-  @apply bg-background border-4 border-foreground p-6 neobrutalist-shadow;
+  .neobrutalist-card {
+    @apply bg-background border-4 border-foreground p-6;
+    box-shadow: 4px 4px 0 hsl(var(--foreground)); /* Use var() here */
+  }
 }
