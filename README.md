@@ -1,3 +1,7 @@
+# `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
+
+# To do
+
 ```txt
 ———-—
 MOTTO: Bringing industry insights to your doorstep
@@ -38,6 +42,18 @@ Checkin on 7 March Friday
 ```
 
 ## Running the frontend
+
+* Right now 2 versions of the frontend exist
+* `balls` is the version with scrolling emojis, but its also a RAM monster
+
+```console
+$ cd balls
+$ npm i
+$ npm run dev
+```
+
+* `yipee` is the plain version that performs better for mobile deployment
+* expo dev branch will follow this version
 
 ```console
 $ cd balls
