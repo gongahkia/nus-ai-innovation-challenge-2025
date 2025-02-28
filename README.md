@@ -1,3 +1,7 @@
+# `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
+
+# To do
+
 ```txt
 ———-—
 MOTTO: Bringing industry insights to your doorstep
@@ -49,6 +53,7 @@ $ npm run dev
 ```
 
 * `yipee` is the plain version that performs better for mobile deployment
+* expo dev branch will follow this version
 
 ```console
 $ cd balls
