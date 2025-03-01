@@ -4,6 +4,10 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 const LandingScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>
+        Yipee!³
+        {"\n"}ᐠ( ᐛ )ᐟ
+        </Text>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Login')}>
         <Text style={styles.cardText}>Log In</Text>
       </TouchableOpacity>
@@ -20,6 +24,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
   card: {
     backgroundColor: '#fff',

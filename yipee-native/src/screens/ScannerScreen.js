@@ -4,25 +4,25 @@ import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 const ScannerScreen = () => {
 
-  const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [cameraType, setCameraType] = useState<CameraType>('back');
+  const [cameraType, setCameraType] = useState('back');
+  const [cameraPermission, requestCameraPermission] = useCameraPermissions();
 
-  if (!permission) { // camera permissions are still loading
+  if (!cameraPermission) { // camera permissions are still loading
     return <View />;
   }
 
-  if (!permission.granted) { // camera permissions are not granted yet
+  if (!cameraPermission.granted) { // camera permissions are not granted yet
     return (
       <View style={styles.container}>
         <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-        <Button onPress={requestPermission} title="Grant permission" />
+        <Button onPress={requestCameraPermission} title="Grant permission" />
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={cameraType}>
+      <CameraView style={styles.camera} type={cameraType}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
@@ -34,7 +34,7 @@ const ScannerScreen = () => {
             <Text style={styles.text}> Flip </Text>
           </TouchableOpacity>
         </View>
-      </Camera>
+      </CameraView>
     </View>
   );
 };
