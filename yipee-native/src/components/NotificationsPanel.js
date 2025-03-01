@@ -28,14 +28,20 @@ const NotificationsPanel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-    padding: 10,
+    backgroundColor: '#ebdbb2',
+    padding: 20,
+    borderRadius: 0,
+    marginVertical: 15,
+    borderWidth: 4,
+    borderColor: '#3c3836',
   },
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+    color: '#3c3836',
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
   notificationItem: {
     padding: 10,
