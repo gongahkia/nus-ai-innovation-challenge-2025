@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import LegalDisclaimer from '../components/LegalDisclaimer';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { auth, db } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
-import LegalDisclaimer from '../components/LegalDisclaimer';
 
 const RegisterScreen = () => {
+
+  const navigation = useNavigation();
   const [businessData, setBusinessData] = useState({
     industry: '',
     ownerNames: '',
@@ -19,10 +22,12 @@ const RegisterScreen = () => {
   });
 
   const handleRegister = () => {
-    // Here you would typically validate the input and then register the user
+
     console.log('Registration data:', businessData);
 
-    // Uncomment this when you're ready to use Firebase
+    navigation.navigate('MainDashboard');
+
+    // uncomment this when we're ready to use Firebase
     /*
     createUserWithEmailAndPassword(auth, businessData.username, businessData.password)
       .then((userCredential) => {
