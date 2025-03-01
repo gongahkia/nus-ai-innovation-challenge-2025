@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { sortInventoryByUrgency } from '../utils/inventoryUtils';
 import InventoryTable from '../components/InventoryTable';
 
@@ -23,6 +23,7 @@ const InventoryScreen = () => {
   };
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
     <View style={styles.container}>
       <Text style={styles.title}>Inventory Management</Text>
       <InventoryTable 
@@ -32,18 +33,30 @@ const InventoryScreen = () => {
         deleteItem={deleteItem}
       />
     </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#fbf1c7', 
+  },
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#fbf1c7', 
   },
   title: {
-    fontSize: 24,
+    fontSize: 48,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 40,
+    textAlign: 'center',
+    color: '#3c3836',
+    textShadow: '4px 4px 0 #cc241d',
   },
 });
 

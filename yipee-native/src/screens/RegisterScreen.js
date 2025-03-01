@@ -82,6 +82,7 @@ const RegisterScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Register</Text>
       <TextInput
         style={styles.input}
         placeholder="Industry"
@@ -157,6 +158,14 @@ const RegisterScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    marginBottom: 40,
+    textAlign: 'center',
+    color: '#3c3836',
+    textShadow: '4px 4px 0 #cc241d',
+  },
   container: {
     flexGrow: 1,
     justifyContent: 'center',
