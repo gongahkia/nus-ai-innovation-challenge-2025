@@ -28,7 +28,7 @@ const ScannerScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} type={cameraType}>
+      <CameraView style={styles.camera} type={facing}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
             <Text style={styles.text}> Flip Camera </Text>
