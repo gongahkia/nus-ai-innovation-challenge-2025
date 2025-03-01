@@ -16,7 +16,7 @@ const InventoryTable = ({ data, addItem, updateItem, deleteItem }) => {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -35,16 +35,21 @@ const InventoryTable = ({ data, addItem, updateItem, deleteItem }) => {
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      />
+      <View style={styles.tableContainer}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   inputContainer: {
     flexDirection: 'row',
     marginBottom: 20,
@@ -74,6 +79,11 @@ const styles = StyleSheet.create({
     color: '#fbf1c7',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  tableContainer: {
+    flex: 1,
+    borderWidth: 4,
+    borderColor: '#3c3836',
   },
   row: {
     flexDirection: 'row',
