@@ -117,7 +117,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        By clicking "I accept the terms and conditions," you acknowledge that you have read, understood, and agree to be
+        By registering below, you acknowledge that you have read, understood, and agree to be
         bound by these Terms.
       </Text>
 

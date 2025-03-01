@@ -14,8 +14,10 @@ const ScannerScreen = () => {
   if (!cameraPermission.granted) { // camera permissions are not granted yet
     return (
       <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-        <Button onPress={requestCameraPermission} title="Grant permission" />
+        <Text style={styles.title}>We need your permission to show the camera</Text>
+        <TouchableOpacity style={styles.button} onPress={requestCameraPermission}>
+          <Text style={styles.text}>Grant permission</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -38,26 +40,55 @@ const ScannerScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 40,
+    textAlign: 'center',
+    color: '#3c3836',
+    textShadow: '4px 4px 0 #cc241d',
+  },
   container: {
     flex: 1,
+    backgroundColor: '#fbf1c7', 
   },
   camera: {
     flex: 1,
+    borderWidth: 4,
+    borderColor: '#3c3836',
   },
   buttonContainer: {
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
     margin: 20,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   button: {
-    flex: 0.1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
+    backgroundColor: '#689d6a',
+    padding: 20,
+    borderRadius: 0,
+    borderWidth: 4,
+    borderColor: '#3c3836',
+    shadowColor: '#3c3836',
+    shadowOffset: { width: 6, height: 6 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 10,
   },
   text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fbf1c7',
+    textTransform: 'uppercase',
+  },
+  permissionText: {
     fontSize: 18,
-    color: 'white',
+    fontWeight: 'bold',
+    color: '#3c3836',
+    textAlign: 'center',
+    marginBottom: 20,
   },
 });
 
