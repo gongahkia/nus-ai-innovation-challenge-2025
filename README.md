@@ -1,6 +1,36 @@
 # `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
 
-# To do
+## Screenshots
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="./1.png" width="32%">
+  <img src="./2.png" width="32%">
+  <img src="./3.png" width="32%">
+</div>
+
+## Running the frontend
+
+### Mobile
+
+```console
+$ cd yipee-native
+$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera
+$ npm install react-native-chart-kit
+$ npx expo start -c --tunnel
+```
+
+Then scan the QR code with the [Camera](https://docs.expo.dev/versions/latest/sdk/camera/) app on IOS or the [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_SG) app on Android.
+
+### Web
+
+```console
+$ cd yipee-native
+$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera
+$ npm install react-native-chart-kit
+$ npx expo start -c --tunnel --web
+```
+
+## 27 Feb call
 
 ```txt
 ———-—
@@ -39,24 +69,4 @@ Gabriel
 WHEN IS DEADLINE 
 
 Checkin on 7 March Friday 
-```
-
-## Running the frontend
-
-* Right now 2 versions of the frontend exist
-* `balls` is the version with scrolling emojis, but its also a RAM monster
-
-```console
-$ cd balls
-$ npm i
-$ npm run dev
-```
-
-* `yipee` is the plain version that performs better for mobile deployment
-* expo dev branch will follow this version
-
-```console
-$ cd balls
-$ npm i
-$ npm run dev
 ```
