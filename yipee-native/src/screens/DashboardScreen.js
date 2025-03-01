@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import NotificationsPanel from '../components/NotificationsPanel';
 
 const DashboardScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Notifications</Text>
+      <Text style={styles.title}>Dashboard</Text>
       
-      <ScrollView style={styles.notificationsPanelContainer}>
+      <View style={styles.notificationsPanelContainer}>
         <NotificationsPanel />
-      </ScrollView>
+      </View>
       
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.smallButton} onPress={() => navigation.navigate('Inventory')}>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   smallButtonText: {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#fbf1c7',
     textTransform: 'uppercase',
