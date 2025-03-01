@@ -14,7 +14,7 @@ const LegalDisclaimer = () => {
         bound by the following terms and conditions:
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           1. ACCOUNT REGISTRATION
       </Text>
 
@@ -35,7 +35,7 @@ const LegalDisclaimer = () => {
         cancel orders at our sole discretion.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           2. BUSINESS INFORMATION
       </Text>
 
@@ -54,7 +54,7 @@ const LegalDisclaimer = () => {
         identity or compliance with applicable laws.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           3. PRIVACY AND DATA PROTECTION
       </Text>
 
@@ -68,7 +68,7 @@ const LegalDisclaimer = () => {
         comply with legal obligations, or as otherwise permitted by our Privacy Policy.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           4. INTELLECTUAL PROPERTY
       </Text>
 
@@ -79,7 +79,7 @@ const LegalDisclaimer = () => {
         property laws.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           5. LIMITATION OF LIABILITY
       </Text>
 
@@ -90,7 +90,7 @@ const LegalDisclaimer = () => {
         THE SERVICE.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           6. GOVERNING LAW
       </Text>
 
@@ -99,7 +99,7 @@ const LegalDisclaimer = () => {
         to its conflict of law provisions.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           7. CHANGES TO TERMS
       </Text>
 
@@ -108,7 +108,7 @@ const LegalDisclaimer = () => {
         material, we will provide at least 30 days' notice prior to any new terms taking effect.
       </Text>
 
-      <Text style={styles.text}>
+      <Text style={styles.sectionHeader}>
           8. CONTACT INFORMATION
       </Text>
 
@@ -117,7 +117,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        By clicking "I accept the terms and conditions," you acknowledge that you have read, understood, and agree to be
+        By registering below, you acknowledge that you have read, understood, and agree to be
         bound by these Terms.
       </Text>
 
@@ -127,18 +127,33 @@ const LegalDisclaimer = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    borderRadius: 5,
-    marginVertical: 10,
+    backgroundColor: '#ebdbb2',
+    padding: 20,
+    borderRadius: 0,
+    marginVertical: 15,
+    borderWidth: 4,
+    borderColor: '#3c3836',
   },
   title: {
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 20,
+    color: '#3c3836',
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
+    marginBottom: 15,
+    color: '#3c3836',
+  },
+  sectionHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
+    color: '#3c3836',
+    textTransform: 'uppercase',
   },
 });
 

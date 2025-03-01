@@ -7,12 +7,12 @@ const LandingScreen = ({ navigation }) => {
       <Text style={styles.title}>
         Yipee!³
         {"\n"}ᐠ( ᐛ )ᐟ
-        </Text>
-      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.cardText}>Log In</Text>
+      </Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Register')}>
-        <Text style={styles.cardText}>Register</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
@@ -24,24 +24,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#fbf1c7', 
   },
   title: {
-    fontSize: 22,
+    fontSize: 48,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 40,
+    textAlign: 'center',
+    color: '#3c3836', 
+    textShadow: '4px 4px 0 #cc241d', 
   },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
+  button: {
+    backgroundColor: '#689d6a', 
+    borderRadius: 0,
     padding: 20,
-    marginVertical: 10,
-    width: '80%',
+    marginVertical: 15,
+    width: '90%',
     alignItems: 'center',
-    elevation: 3,
+    borderWidth: 4,
+    borderColor: '#3c3836', 
+    shadowColor: '#3c3836', 
+    shadowOffset: { width: 6, height: 6 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 10,
   },
-  cardText: {
-    fontSize: 18,
+  buttonText: {
+    fontSize: 24,
     fontWeight: 'bold',
+    color: '#fbf1c7', 
+    textTransform: 'uppercase',
   },
 });
 

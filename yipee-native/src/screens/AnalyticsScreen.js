@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Animated, ScrollView  } from 'react-native';
 import { LineChart, PieChart, BarChart, ProgressChart } from 'react-native-chart-kit';
 
 const AnalyticsScreen = () => {
@@ -43,125 +43,151 @@ const AnalyticsScreen = () => {
   };
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-      <Text style={styles.title}>Company Analytics Dashboard</Text>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+        <Text style={styles.title}>Company Analytics Dashboard</Text>
 
-      {/* Line Chart */}
-      <LineChart
-        data={salesData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        yAxisLabel="$"
-        chartConfig={chartConfig}
-        bezier
-        style={styles.chart}
-      />
+        {/* Line Chart */}
+        <LineChart
+          data={salesData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          yAxisLabel="$"
+          chartConfig={chartConfig}
+          bezier
+          style={styles.chart}
+        />
 
-      {/* Pie Chart */}
-      <Text style={styles.subtitle}>Product Sales Distribution</Text>
-      <PieChart
-        data={pieData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        chartConfig={chartConfig}
-        accessor={"population"}
-        backgroundColor={"transparent"}
-        paddingLeft={"15"}
-        center={[10, 50]}
-        absolute
-      />
+        {/* Pie Chart */}
+        <Text style={styles.subtitle}>Product Sales Distribution</Text>
+        <PieChart
+          data={pieData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          chartConfig={chartConfig}
+          accessor={"population"}
+          backgroundColor={"transparent"}
+          paddingLeft={"15"}
+          center={[10, 50]}
+          absolute
+        />
 
-      {/* Bar Chart */}
-      <Text style={styles.subtitle}>Quarterly Revenue</Text>
-      <BarChart
-        data={revenueData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        yAxisLabel="$"
-        chartConfig={chartConfig}
-        style={styles.chart}
-      />
+        {/* Bar Chart */}
+        <Text style={styles.subtitle}>Quarterly Revenue</Text>
+        <BarChart
+          data={revenueData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          yAxisLabel="$"
+          chartConfig={chartConfig}
+          style={styles.chart}
+        />
 
-      {/* Progress Chart */}
-      <Text style={styles.subtitle}>Company Growth Metrics</Text>
-      <ProgressChart
-        data={progressData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        strokeWidth={16}
-        radius={32}
-        chartConfig={chartConfig}
-        hideLegend={false}
-        style={styles.chart}
-      />
+        {/* Progress Chart */}
+        <Text style={styles.subtitle}>Company Growth Metrics</Text>
+        <ProgressChart
+          data={progressData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          strokeWidth={16}
+          radius={32}
+          chartConfig={chartConfig}
+          hideLegend={false}
+          style={styles.chart}
+        />
 
-      {/* Stock Data Table */}
-      <Text style={styles.subtitle}>Stock Price Trends</Text>
-      <View style={styles.table}>
-        {stockData.map((item, index) => (
-          <View key={index} style={styles.row}>
-            <Text style={styles.cell}>{item.day}</Text>
-            <Text style={styles.cell}>{item.price}</Text>
-          </View>
-        ))}
-      </View>
-    </Animated.View>
+        {/* Stock Data Table */}
+        <Text style={styles.subtitle}>Stock Price Trends</Text>
+        <View style={styles.table}>
+          {stockData.map((item, index) => (
+            <View key={index} style={styles.row}>
+              <Text style={styles.cell}>{item.day}</Text>
+              <Text style={styles.cell}>{item.price}</Text>
+            </View>
+          ))}
+        </View>
+      </Animated.View>
+    </ScrollView>
   );
 };
 
 // Chart Configuration
 const chartConfig = {
-  backgroundColor: "#e26a00",
-  backgroundGradientFrom: "#fb8c00",
-  backgroundGradientTo: "#ffa726",
+  backgroundColor: "#689d6a",
+  backgroundGradientFrom: "#689d6a",
+  backgroundGradientTo: "#689d6a",
   decimalPlaces: 2,
-  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  style: { borderRadius: 16 },
-  propsForDots: { r: "6", strokeWidth: "2", stroke: "#ffa726" },
+  color: (opacity = 1) => `rgba(251, 241, 199, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(60, 56, 54, ${opacity})`,
+  style: { 
+    borderRadius: 0,
+    borderWidth: 4,
+    borderColor: '#3c3836',
+  },
+  propsForDots: { 
+    r: "6", 
+    strokeWidth: "2", 
+    stroke: "#3c3836" 
+  },
 };
 
 // Styles
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#fbf1c7', 
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    width: '100%',
   },
   title: {
-    fontSize: 24,
+    fontSize: 48,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 40,
+    textAlign: 'center',
+    color: '#3c3836',
+    textShadow: '4px 4px 0 #cc241d',
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 30,
+    marginBottom: 20,
+    color: '#3c3836',
   },
   chart: {
-    marginVertical: 8,
-    borderRadius: 16,
+    marginVertical: 20,
+    borderRadius: 0,
+    borderWidth: 4,
+    borderColor: '#3c3836',
   },
   table: {
     width: Dimensions.get("window").width - 40,
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 8,
+    marginTop: 20,
+    borderWidth: 4,
+    borderColor: "#3c3836",
+    borderRadius: 0,
     overflow: "hidden",
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    padding: 15,
+    borderBottomWidth: 4,
+    borderBottomColor: "#3c3836",
+    backgroundColor: '#ebdbb2',
   },
   cell: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+    color: '#3c3836',
   },
 });
 
