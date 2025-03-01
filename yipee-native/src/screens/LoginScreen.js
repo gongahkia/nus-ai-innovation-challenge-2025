@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, useNavigation, TouchableOpacity, StyleSheet } from 'react-native';
 
 // comment in the below imports when firebase is linked up
 // ~ gong
@@ -8,6 +8,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 // import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = () => {
+
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

@@ -6,7 +6,7 @@ const LegalDisclaimer = () => {
     <View style={styles.container}>
 
       <Text style={styles.title}>
-        <strong>LEGAL DISCLAIMER AND TERMS OF SERVICE</strong>
+          LEGAL DISCLAIMER AND TERMS OF SERVICE
       </Text>
 
       <Text style={styles.text}>
@@ -15,7 +15,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>1. ACCOUNT REGISTRATION</strong>
+          1. ACCOUNT REGISTRATION
       </Text>
 
       <Text style={styles.text}>
@@ -36,7 +36,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>2. BUSINESS INFORMATION</strong>
+          2. BUSINESS INFORMATION
       </Text>
 
       <Text style={styles.text}>
@@ -55,7 +55,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>3. PRIVACY AND DATA PROTECTION</strong>
+          3. PRIVACY AND DATA PROTECTION
       </Text>
 
       <Text style={styles.text}>
@@ -69,7 +69,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>4. INTELLECTUAL PROPERTY</strong>
+          4. INTELLECTUAL PROPERTY
       </Text>
 
       <Text style={styles.text}>
@@ -80,7 +80,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>5. LIMITATION OF LIABILITY</strong>
+          5. LIMITATION OF LIABILITY
       </Text>
 
       <Text style={styles.text}>
@@ -91,7 +91,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>6. GOVERNING LAW</strong>
+          6. GOVERNING LAW
       </Text>
 
       <Text style={styles.text}>
@@ -100,7 +100,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>7. CHANGES TO TERMS</strong>
+          7. CHANGES TO TERMS
       </Text>
 
       <Text style={styles.text}>
@@ -109,7 +109,7 @@ const LegalDisclaimer = () => {
       </Text>
 
       <Text style={styles.text}>
-        <strong>8. CONTACT INFORMATION</strong>
+          8. CONTACT INFORMATION
       </Text>
 
       <Text style={styles.text}>
