@@ -8,14 +8,16 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // For now, we'll use a hardcoded test login
-    if (username === 'testuser' && password === 'testpassword') {
+    if (username === 'username' && password === 'password') { // test values we'll need to change later ~ gong
       alert('Login successful!');
+      navigation.navigate('MainDashboard');
     } else {
       alert('Invalid credentials');
     }
+  };
 
-    // Uncomment this when you're ready to use Firebase authentication
+    // uncomment this when we're ready to use firebase authentication
+    // ~ gong
     /*
     signInWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
