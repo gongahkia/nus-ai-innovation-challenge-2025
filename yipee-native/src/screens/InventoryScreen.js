@@ -23,7 +23,6 @@ const InventoryScreen = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
     <View style={styles.container}>
       <Text style={styles.title}>Inventory Management</Text>
       <InventoryTable 
@@ -33,18 +32,10 @@ const InventoryScreen = () => {
         deleteItem={deleteItem}
       />
     </View>
-    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollViewContent: {
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#fbf1c7', 
-  },
   container: {
     flex: 1,
     padding: 20,

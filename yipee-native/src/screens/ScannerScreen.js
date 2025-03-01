@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 const ScannerScreen = () => {
 
+  const [facing, setFacing] = useState('back');
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
   const [photo, setPhoto] = useState(null);
   const cameraRef = useRef(null);
@@ -64,7 +65,7 @@ const ScannerScreen = () => {
       ) : (
         <CameraView 
           style={styles.camera} 
-          type={CameraType.back}
+          type={facing}
           ref={cameraRef}
         >
           <View style={styles.buttonContainer}>

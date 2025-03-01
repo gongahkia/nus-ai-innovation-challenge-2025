@@ -45,7 +45,7 @@ const AnalyticsScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-        <Text style={styles.title}>Company Analytics Dashboard</Text>
+        <Text style={styles.title}>Your Latest Analytics</Text>
 
         {/* Line Chart */}
         <LineChart
