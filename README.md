@@ -1,17 +1,5 @@
 # `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
 
-> [!NOTE]
-> **Still debugging** the react native frontend on expo dev branch.
-> `yipee` relies on many Nextjs libraries that will need rewriting.
-
-## Screenshots
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="./1.png" width="32%">
-  <img src="./2.png" width="32%">
-  <img src="./3.png" width="32%">
-</div>
-
 ## Running the frontend
 
 ### Mobile 
