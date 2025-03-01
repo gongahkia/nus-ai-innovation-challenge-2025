@@ -1,40 +1,37 @@
 # `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
 
-> [!NOTE]
-> **Still debugging** the react native frontend on expo dev branch.
-> `yipee` relies on many Nextjs libraries that will need rewriting.
-
-## Screenshots
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="./1.png" width="32%">
-  <img src="./2.png" width="32%">
-  <img src="./3.png" width="32%">
-</div>
-
 ## Running the frontend
 
-### Mobile
+### Mobile 
+
+* Mobile app for their convenience
+* Quick uploading of images
+* View notifications and summary analytics on the go
 
 ```console
 $ cd yipee-native
-$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg
+$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg expo-image-picker
 $ npm install react-native-chart-kit @react-navigation/bottom-tabs
 $ npx expo start --clear -c --tunnel
+$ npx expo start --clear -c --tunnel --web
 ```
 
 Then scan the QR code with the [Camera](https://docs.expo.dev/versions/latest/sdk/camera/) app on IOS or the [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_SG) app on Android.
 
 ### Web
 
+* Unified fully-featured dashboard 
+* Detailed inventory management 
+* In-depth analytics and market trend predictions
+
 ```console
-$ cd yipee-native
-$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg
-$ npm install react-native-chart-kit @react-navigation/bottom-tabs
-$ npx expo start --clear -c --tunnel --web
+$ cd yipee
+$ npm run dev
 ```
 
-## 27 Feb call
+Then view the site at [http://localhost:3000](http://localhost:3000).
+
+## 27 Feb 2025 Call
 
 ```txt
 ———-—

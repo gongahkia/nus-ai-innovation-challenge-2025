@@ -5,7 +5,7 @@ import NotificationsPanel from '../components/NotificationsPanel';
 const DashboardScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dashboard</Text>
+      <Text style={styles.title}>Notifications</Text>
       
       <View style={styles.notificationsPanelContainer}>
         <NotificationsPanel />
