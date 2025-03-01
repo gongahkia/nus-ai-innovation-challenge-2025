@@ -4,7 +4,7 @@ import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 const ScannerScreen = () => {
 
-  const [cameraType, setCameraType] = useState('back');
+  const [facing, setFacing] = useState('back');
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
 
   if (!cameraPermission) { // camera permissions are still loading

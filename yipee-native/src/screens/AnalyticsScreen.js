@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Animated, ScrollView  } from 'react-native';
 import { LineChart, PieChart, BarChart, ProgressChart } from 'react-native-chart-kit';
 
 const AnalyticsScreen = () => {
@@ -43,69 +43,71 @@ const AnalyticsScreen = () => {
   };
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-      <Text style={styles.title}>Company Analytics Dashboard</Text>
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+        <Text style={styles.title}>Company Analytics Dashboard</Text>
 
-      {/* Line Chart */}
-      <LineChart
-        data={salesData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        yAxisLabel="$"
-        chartConfig={chartConfig}
-        bezier
-        style={styles.chart}
-      />
+        {/* Line Chart */}
+        <LineChart
+          data={salesData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          yAxisLabel="$"
+          chartConfig={chartConfig}
+          bezier
+          style={styles.chart}
+        />
 
-      {/* Pie Chart */}
-      <Text style={styles.subtitle}>Product Sales Distribution</Text>
-      <PieChart
-        data={pieData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        chartConfig={chartConfig}
-        accessor={"population"}
-        backgroundColor={"transparent"}
-        paddingLeft={"15"}
-        center={[10, 50]}
-        absolute
-      />
+        {/* Pie Chart */}
+        <Text style={styles.subtitle}>Product Sales Distribution</Text>
+        <PieChart
+          data={pieData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          chartConfig={chartConfig}
+          accessor={"population"}
+          backgroundColor={"transparent"}
+          paddingLeft={"15"}
+          center={[10, 50]}
+          absolute
+        />
 
-      {/* Bar Chart */}
-      <Text style={styles.subtitle}>Quarterly Revenue</Text>
-      <BarChart
-        data={revenueData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        yAxisLabel="$"
-        chartConfig={chartConfig}
-        style={styles.chart}
-      />
+        {/* Bar Chart */}
+        <Text style={styles.subtitle}>Quarterly Revenue</Text>
+        <BarChart
+          data={revenueData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          yAxisLabel="$"
+          chartConfig={chartConfig}
+          style={styles.chart}
+        />
 
-      {/* Progress Chart */}
-      <Text style={styles.subtitle}>Company Growth Metrics</Text>
-      <ProgressChart
-        data={progressData}
-        width={Dimensions.get("window").width - 40}
-        height={220}
-        strokeWidth={16}
-        radius={32}
-        chartConfig={chartConfig}
-        hideLegend={false}
-        style={styles.chart}
-      />
+        {/* Progress Chart */}
+        <Text style={styles.subtitle}>Company Growth Metrics</Text>
+        <ProgressChart
+          data={progressData}
+          width={Dimensions.get("window").width - 40}
+          height={220}
+          strokeWidth={16}
+          radius={32}
+          chartConfig={chartConfig}
+          hideLegend={false}
+          style={styles.chart}
+        />
 
-      {/* Stock Data Table */}
-      <Text style={styles.subtitle}>Stock Price Trends</Text>
-      <View style={styles.table}>
-        {stockData.map((item, index) => (
-          <View key={index} style={styles.row}>
-            <Text style={styles.cell}>{item.day}</Text>
-            <Text style={styles.cell}>{item.price}</Text>
-          </View>
-        ))}
-      </View>
-    </Animated.View>
+        {/* Stock Data Table */}
+        <Text style={styles.subtitle}>Stock Price Trends</Text>
+        <View style={styles.table}>
+          {stockData.map((item, index) => (
+            <View key={index} style={styles.row}>
+              <Text style={styles.cell}>{item.day}</Text>
+              <Text style={styles.cell}>{item.price}</Text>
+            </View>
+          ))}
+        </View>
+      </Animated.View>
+    </ScrollView>
   );
 };
 
@@ -123,11 +125,18 @@ const chartConfig = {
 
 // Styles
 const styles = StyleSheet.create({
+  scrollViewContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    width: '100%',
   },
   title: {
     fontSize: 24,
