@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Button, Image } from 'react-native';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 
 const ScannerScreen = () => {
 
-  const [facing, setFacing] = useState('back');
   const [cameraPermission, requestCameraPermission] = useCameraPermissions();
+  const [photo, setPhoto] = useState(null);
+  const cameraRef = useRef(null);
 
   if (!cameraPermission) { // camera permissions are still loading
     return <View />;
@@ -22,24 +24,77 @@ const ScannerScreen = () => {
     );
   }
 
-  const toggleCameraFacing = () => {
-    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  const takePhoto = async () => {
+    if (cameraRef.current) {
+      const photo = await cameraRef.current.takePictureAsync();
+      setPhoto(photo);
+      sendPhotoSimulation(photo);
+    }
+  };
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setPhoto(result.assets[0]);
+      sendPhoto(result.assets[0]);
+    }
+  };
+
+  const sendPhoto = (photo) => {
+    // right now we're simulating sending photos to a file server somewhere, maybe could
+    // consider implementing an API that can do OCR for us???
+    // ~ gong
+    console.log('Simulating sending photo for now:', photo.uri);
   };
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} type={facing}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}> Flip Camera </Text>
+      {photo ? (
+        <View style={styles.previewContainer}>
+          <Image source={{ uri: photo.uri }} style={styles.preview} />
+          <TouchableOpacity style={styles.button} onPress={() => setPhoto(null)}>
+            <Text style={styles.text}>Take Another Photo</Text>
           </TouchableOpacity>
         </View>
-      </CameraView>
+      ) : (
+        <CameraView 
+          style={styles.camera} 
+          type={CameraType.back}
+          ref={cameraRef}
+        >
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={takePhoto}>
+              <Text style={styles.text}>Take Photo</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={pickImage}>
+              <Text style={styles.text}>Pick from Gallery</Text>
+            </TouchableOpacity>
+          </View>
+        </CameraView>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  previewContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fbf1c7',
+  },
+  preview: {
+    width: '80%',
+    height: '60%',
+    marginBottom: 20,
+    borderWidth: 4,
+    borderColor: '#3c3836',
+  },
   title: {
     fontSize: 36,
     fontWeight: 'bold',
@@ -58,12 +113,10 @@ const styles = StyleSheet.create({
     borderColor: '#3c3836',
   },
   buttonContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    margin: 20,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   button: {
     backgroundColor: '#689d6a',

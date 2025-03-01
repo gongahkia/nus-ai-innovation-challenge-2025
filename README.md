@@ -18,7 +18,7 @@
 
 ```console
 $ cd yipee-native
-$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg
+$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg expo-image-picker
 $ npm install react-native-chart-kit @react-navigation/bottom-tabs
 $ npx expo start --clear -c --tunnel
 ```
@@ -29,7 +29,7 @@ Then scan the QR code with the [Camera](https://docs.expo.dev/versions/latest/sd
 
 ```console
 $ cd yipee-native
-$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg
+$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg expo-image-picker
 $ npm install react-native-chart-kit @react-navigation/bottom-tabs
 $ npx expo start --clear -c --tunnel --web
 ```
