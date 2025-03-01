@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { auth } from '../../firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+
+// comment in the below imports when firebase is linked up
+// ~ gong
+
+// import { auth } from '../../firebaseConfig';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
