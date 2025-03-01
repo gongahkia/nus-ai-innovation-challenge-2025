@@ -9,6 +9,7 @@ import { setDoc, doc } from 'firebase/firestore';
 const RegisterScreen = () => {
 
   const navigation = useNavigation();
+  const [errors, setErrors] = useState({});
   const [businessData, setBusinessData] = useState({
     industry: '',
     ownerNames: '',
@@ -21,7 +22,31 @@ const RegisterScreen = () => {
     recoveryPhone: '',
   });
 
+  const validateInputs = () => {
+    let newErrors = {};
+    if (!businessData.industry) newErrors.industry = "Industry is required";
+    if (!businessData.ownerNames) newErrors.ownerNames = "Owner names are required";
+    if (!businessData.annualIncome) newErrors.annualIncome = "Annual income is required";
+    if (!businessData.businessLocation) newErrors.businessLocation = "Business location is required";
+    if (!businessData.username) newErrors.username = "Username is required";
+    if (!businessData.password) newErrors.password = "Password is required";
+    if (!businessData.recoveryEmail) {
+      newErrors.recoveryEmail = "Recovery email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(businessData.recoveryEmail)) {
+      newErrors.recoveryEmail = "Invalid email format";
+    }
+    if (!businessData.recoveryPhone) {
+      newErrors.recoveryPhone = "Recovery phone is required";
+    } else if (!/^65\d{8}$/.test(businessData.recoveryPhone)) {
+      newErrors.recoveryPhone = "Phone must start with 65 and be 10 digits";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleRegister = () => {
+
+    if (!validateInputs()) return;
 
     console.log('Registration data:', businessData);
 
@@ -63,12 +88,14 @@ const RegisterScreen = () => {
         value={businessData.industry}
         onChangeText={(text) => setBusinessData({...businessData, industry: text})}
       />
+      {errors.industry && <Text style={styles.errorText}>{errors.industry}</Text>}
       <TextInput
         style={styles.input}
         placeholder="Owner Names"
         value={businessData.ownerNames}
         onChangeText={(text) => setBusinessData({...businessData, ownerNames: text})}
       />
+      {errors.ownerNames && <Text style={styles.errorText}>{errors.ownerNames}</Text>}
       <TextInput
         style={styles.input}
         placeholder="Annual Income"
@@ -76,12 +103,14 @@ const RegisterScreen = () => {
         onChangeText={(text) => setBusinessData({...businessData, annualIncome: text})}
         keyboardType="numeric"
       />
+      {errors.annualIncome && <Text style={styles.errorText}>{errors.annualIncome}</Text>}
       <TextInput
         style={styles.input}
         placeholder="Business Location"
         value={businessData.businessLocation}
         onChangeText={(text) => setBusinessData({...businessData, businessLocation: text})}
       />
+      {errors.businessLocation && <Text style={styles.errorText}>{errors.businessLocation}</Text>}
       <TouchableOpacity
         style={styles.checkbox}
         onPress={() => setBusinessData({...businessData, hasPhysicalLocation: !businessData.hasPhysicalLocation})}
@@ -94,6 +123,7 @@ const RegisterScreen = () => {
         value={businessData.username}
         onChangeText={(text) => setBusinessData({...businessData, username: text})}
       />
+      {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -101,6 +131,7 @@ const RegisterScreen = () => {
         onChangeText={(text) => setBusinessData({...businessData, password: text})}
         secureTextEntry
       />
+      {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
       <TextInput
         style={styles.input}
         placeholder="Recovery Email"
@@ -108,6 +139,7 @@ const RegisterScreen = () => {
         onChangeText={(text) => setBusinessData({...businessData, recoveryEmail: text})}
         keyboardType="email-address"
       />
+      {errors.recoveryEmail && <Text style={styles.errorText}>{errors.recoveryEmail}</Text>}
       <TextInput
         style={styles.input}
         placeholder="Recovery Phone"
@@ -115,6 +147,7 @@ const RegisterScreen = () => {
         onChangeText={(text) => setBusinessData({...businessData, recoveryPhone: text})}
         keyboardType="phone-pad"
       />
+      {errors.recoveryPhone && <Text style={styles.errorText}>{errors.recoveryPhone}</Text>}
       <LegalDisclaimer />
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
@@ -152,6 +185,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginBottom: 5,
   },
 });
 
