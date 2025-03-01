@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 const ScannerScreen = () => {
