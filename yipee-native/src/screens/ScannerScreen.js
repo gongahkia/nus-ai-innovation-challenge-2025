@@ -20,18 +20,16 @@ const ScannerScreen = () => {
     );
   }
 
+  const toggleCameraFacing = () => {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  };
+
   return (
     <View style={styles.container}>
       <CameraView style={styles.camera} type={cameraType}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setCameraType(
-                cameraType === 'back' ? 'front' : 'back'
-              );
-            }}>
-            <Text style={styles.text}> Flip </Text>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+            <Text style={styles.text}> Flip Camera </Text>
           </TouchableOpacity>
         </View>
       </CameraView>
