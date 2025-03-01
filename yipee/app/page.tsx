@@ -7,7 +7,9 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background">
       <div className="flex-1 flex flex-col">
         <main className="flex-1 container mx-auto flex flex-col items-center justify-center py-12">
-          <h1 className="text-8xl font-black mb-12 text-center text-foreground neobrutalist-shadow">Balls</h1>
+          <h1 className="text-8xl font-black mb-12 text-center text-foreground neobrutalist-shadow">
+            Yipee!³<br />ᐠ( ᐛ )ᐟ
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
             <Card className="neobrutalist-card">
               <CardHeader>

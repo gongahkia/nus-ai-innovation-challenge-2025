@@ -1,23 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import NotificationsPanel from '../components/NotificationsPanel';
 
 const DashboardScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>Dashboard</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Inventory')}>
-          <Text style={styles.buttonText}>Manage Inventory</Text>
+      <Text style={styles.title}>Notifications</Text>
+      
+      <ScrollView style={styles.notificationsPanelContainer}>
+        <NotificationsPanel />
+      </ScrollView>
+      
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.smallButton} onPress={() => navigation.navigate('Inventory')}>
+          <Text style={styles.smallButtonText}>Inventory</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Scanner')}>
-          <Text style={styles.buttonText}>Scan POS Slip</Text>
+        <TouchableOpacity style={styles.smallButton} onPress={() => navigation.navigate('Scanner')}>
+          <Text style={styles.smallButtonText}>Scan POS</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Analytics')}>
-          <Text style={styles.buttonText}>View Sales Analytics</Text>
+        <TouchableOpacity style={styles.smallButton} onPress={() => navigation.navigate('Analytics')}>
+          <Text style={styles.smallButtonText}>Analytics</Text>
         </TouchableOpacity>
       </View>
-      <NotificationsPanel />
     </View>
   );
 };
@@ -25,40 +29,41 @@ const DashboardScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#fbf1c7', 
-  },
-  content: {
-    flex: 3,
+    backgroundColor: '#fbf1c7',
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   title: {
     fontSize: 48,
     fontWeight: 'bold',
-    marginBottom: 40,
+    marginBottom: 20,
     textAlign: 'center',
     color: '#3c3836',
     textShadow: '4px 4px 0 #cc241d',
   },
-  button: {
+  notificationsPanelContainer: {
+    flex: 1,
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  smallButton: {
     backgroundColor: '#689d6a',
     borderRadius: 0,
-    padding: 20,
-    marginVertical: 15,
-    width: '90%',
+    padding: 10,
+    width: '30%',
     alignItems: 'center',
     borderWidth: 4,
     borderColor: '#3c3836',
     shadowColor: '#3c3836',
-    shadowOffset: { width: 6, height: 6 },
+    shadowOffset: { width: 4, height: 4 },
     shadowOpacity: 1,
     shadowRadius: 0,
-    elevation: 10,
+    elevation: 8,
   },
-  buttonText: {
-    fontSize: 24,
+  smallButtonText: {
+    fontSize: 12,
     fontWeight: 'bold',
     color: '#fbf1c7',
     textTransform: 'uppercase',
