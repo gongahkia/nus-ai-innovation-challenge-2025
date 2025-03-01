@@ -31,7 +31,6 @@ const LoginScreen = () => {
         console.error('Login error:', errorCode, errorMessage);
       });
     */
-  };
 
   return (
     <View style={styles.container}>
