@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
+import { Camera, CameraType } from 'expo-camera';
 
 const ScannerScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+  const [type, setType] = useState(CameraType.back);
 
   useEffect(() => {
     (async () => {
@@ -28,9 +28,9 @@ const ScannerScreen = () => {
             style={styles.button}
             onPress={() => {
               setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
+                type === CameraType.back
+                  ? CameraType.front
+                  : CameraType.back
               );
             }}>
             <Text style={styles.text}> Flip </Text>
