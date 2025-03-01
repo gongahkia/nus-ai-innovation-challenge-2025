@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Camera, CameraType } from 'expo-camera';
+import { CameraView } from 'expo-camera';
 
 const ScannerScreen = () => {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(CameraType.back);
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [cameraType, setCameraType] = useState('back');
 
-  if (hasPermission === null) {
+  if (!permission) { // camera permissions are still loading
     return <View />;
   }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+
+  if (!permission.granted) { // camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="Grant permission" />
+      </View>
+    );
   }
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera style={styles.camera} type={cameraType}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setType(
-                type === CameraType.back
-                  ? CameraType.front
-                  : CameraType.back
+              setCameraType(
+                cameraType === 'back' ? 'front' : 'back'
               );
             }}>
             <Text style={styles.text}> Flip </Text>
