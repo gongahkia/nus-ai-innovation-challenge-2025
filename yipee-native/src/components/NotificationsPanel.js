@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 
-const notifications = [
+const initialNotifications = [
   { id: '1', message: 'Your stock of Penne Pasta is running out', urgency: 'high' },
   { id: '2', message: 'Anticipated high demand for tomato sauce in the coming 2 weeks', urgency: 'medium' },
   { id: '3', message: 'Shipping delays for cherries for the coming fall season', urgency: 'low' },
@@ -28,9 +28,22 @@ const notifications = [
 ];
 
 const NotificationsPanel = () => {
+
+  const [notifications, setNotifications] = useState(initialNotifications);
+
+  const removeNotification = (id) => {
+    setNotifications(notifications.filter(notification => notification.id !== id));
+  };
+
   const renderItem = ({ item }) => (
     <View style={[styles.notificationItem, styles[item.urgency]]}>
       <Text style={styles.notificationText}>{item.message}</Text>
+      <TouchableOpacity 
+        style={styles.removeButton} 
+        onPress={() => removeNotification(item.id)}
+      >
+      <Text style={styles.removeButtonText}>X</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -70,6 +83,19 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     borderWidth: 3,
     borderColor: '#3c3836',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  removeButton: {
+    padding: 5,
+    backgroundColor: '#3c3836',
+    borderRadius: 0,
+  },
+  removeButtonText: {
+    color: '#fbf1c7',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   notificationText: {
     color: '#3c3836',
