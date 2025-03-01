@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { CameraView } from 'expo-camera';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 
 const ScannerScreen = () => {
 
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [cameraType, setCameraType] = useState('back');
+  const [cameraType, setCameraType] = useState<CameraType>('back');
 
   if (!permission) { // camera permissions are still loading
     return <View />;
