@@ -33,7 +33,16 @@ This backend system powers an AI-driven checkout and point-of-sale (POS) solutio
 
 - Node.js
 - Express.js
-- MongoDB
+  
+Firebase supports various authentication methods, including:
+
+Email/Password Authentication: Users can register and log in with their email and password using methods like createUserWithEmailAndPassword and signInWithEmailAndPassword12.
+
+Third-Party Providers: Supports providers such as Google, Facebook, Twitter, and GitHub for seamless social login integration24.
+
+Anonymous Authentication: Allows users to interact with the app without requiring sign-up, useful for guest users2.
+
+Email Link Authentication: Sends secure sign-in links to users' email addresses
 - TensorFlow.js for AI analytics
 
 ## Configuration
