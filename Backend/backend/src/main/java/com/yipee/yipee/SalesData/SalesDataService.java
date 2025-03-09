@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface SalesDataService {
 
-    SalesData addSalesDataByCompany(SalesData salesData);
+    SalesData addSalesDataByCompany(SalesData salesData, Long companyId);
     SalesData updateSalesDataByCompany(Long salesDataid, SalesData updatedSalesData, Long companyId);
     void deleteSalesData(Long id);
     List<SalesData> getSalesDataByCompany(Long companyId);

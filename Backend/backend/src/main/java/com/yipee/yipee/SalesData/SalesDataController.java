@@ -53,6 +53,11 @@ public class SalesDataController {
         return ResponseEntity.ok(salesDataService.getSalesDataByTimeAndCompany(itemBatchId, dateTime));
     }
 
+    @GetMapping("/{salesDataId}/finalised")
+    public ResponseEntity<SalesData> finaliseSalesData(@PathVariable Long companyId, @PathVariable Long salesDataId) {
+        return ResponseEntity.ok(salesDataService.finaliseSalesData(salesDataId));
+    }
+
     @GetMapping("/total")
     public ResponseEntity<Integer> getTotalSalesByCompany(@PathVariable Long companyId) {
         return ResponseEntity.ok(salesDataService.getTotalSalesByCompany(companyId));

@@ -22,7 +22,8 @@ public class SalesDataServiceImpl implements SalesDataService {
 
     @Transactional
     @Override
-    public SalesData addSalesDataByCompany(SalesData salesData) {
+    public SalesData addSalesDataByCompany(SalesData salesData, Long companyId) {
+        salesData.setCompany(new Company(companyId));
         salesData.setDateTime(LocalDateTime.now());
 
         for (SalesDataItem item : salesData.getItems()) {
@@ -34,7 +35,7 @@ public class SalesDataServiceImpl implements SalesDataService {
             // Link SalesDataItem to SalesData
             item.setSalesData(salesData);
         }
-
+        
         return salesDataRepository.save(salesData);
     }
 
