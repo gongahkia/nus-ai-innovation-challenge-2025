@@ -8,10 +8,10 @@ public interface SalesDataService {
     SalesData addSalesDataByCompany(SalesData salesData);
     SalesData updateSalesDataByCompany(Long salesDataid, SalesData updatedSalesData, Long companyId);
     void deleteSalesData(Long id);
-    //SalesData[] getAllSalesData();
     List<SalesData> getSalesDataByCompany(Long companyId);
     List<SalesData> getSalesDataByTimeAndCompany(Long itemBatchId, LocalDateTime dateTime);
     int getTotalSalesByCompany(Long companyId);
     int getTotalSalesByTimeAndCompany(Long itemBatchId, LocalDateTime dateTime);
     List<SalesData> getSalesDataByDate(LocalDateTime date);
+    void finalizeSalesData(Long salesDataId);
 }

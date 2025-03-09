@@ -1,27 +1,28 @@
 package com.yipee.yipee.SalesData;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
+import java.util.List;
 
-import com.yipee.yipee.Company.Company;
-
-// transaction data
-// contains the date and time of the transaction, the product name, the expiration date, 
-// the quantity sold, and the company
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class SalesData {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Long companyId;
     private LocalDateTime dateTime;
-    private String[] productName;
-    private LocalDate[] expirationDate;
-    private int[] quantitySold;
-    @ManyToOne
-    private Company company;
+    private double amount;
+
+    @OneToMany(mappedBy = "salesData")
+    private List<SalesItem> salesItems;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean ended = false;  // whether the sales data has ended
 }
