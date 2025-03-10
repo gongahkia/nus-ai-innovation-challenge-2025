@@ -27,13 +27,13 @@ public class SalesItemServiceImpl implements SalesItemService {
     @Override
     public SalesItem addSalesItemToSalesData(SalesItem salesItem, Long salesDataId) {
         salesItem.setSalesDataId(salesDataId);
-        salesItemsRepository.add(salesItem);
+        salesItemRepository.save(salesItem); // Use save to ensure entity persists
         return salesItem;
     }
 
     @Transactional
     @Override
-    public SalesItem updateSalesItemQuantity(Long salesItemId, int newQuantity) {
+    public SalesItem updateSalesItemQuantity(Long salesItemId, int quantitySold) { //changed to match interface
         return salesItemRepository.findById(salesItemId).map(salesItem -> {
             // Check if the SalesData is finalized
             if (salesItem.getSalesData().isEnded()) {
@@ -41,7 +41,7 @@ public class SalesItemServiceImpl implements SalesItemService {
             }
 
             int oldQuantity = salesItem.getQuantitySold();
-            int quantityDifference = newQuantity - oldQuantity;
+            int quantityDifference = quantitySold - oldQuantity;
 
             // Adjust stock levels accordingly
             if (quantityDifference > 0) {
@@ -51,7 +51,7 @@ public class SalesItemServiceImpl implements SalesItemService {
             }
 
             // Update the SalesItem quantity
-            salesItem.setQuantitySold(newQuantity);
+            salesItem.setQuantitySold(quantitySold);
             SalesItem updatedItem = salesItemRepository.save(salesItem);
 
             // Update SalesData totals
@@ -73,23 +73,17 @@ public class SalesItemServiceImpl implements SalesItemService {
             salesDataRepository.save(salesData);
             return salesItem;
         }).orElseThrow(() -> new IllegalArgumentException("Sales data not found"));
-        salesItemRepository.deleteById(id);
+        salesItemRepository.deleteById(salesItemId);
     }
 
     @Override
-    public SalesItem getSalesItemById(Long id) {
-        return salesItemRepository.findById(id)
+    public SalesItem getSalesItemById(Long salesItemId) {
+        return salesItemRepository.findById(salesItemId)
                 .orElseThrow(() -> new IllegalArgumentException("Sales item not found"));
     }
 
     @Override
     public List<SalesItem> getSalesItemsBySalesDataId(Long salesDataId) {
-        List<SalesItem> itemsForSalesData = new ArrayList<>();
-        for (SalesItem item : salesItemsRepository.findAll()) {
-            if (item.getSalesData.getId().equals(salesDataId)) {
-                itemsForSalesData.add(item);
-            }
-        }
-        return itemsForSalesData;
+        return salesItemRepository.findBySalesDataId(salesDataId); // Use the repository method alr found in SalesItemRepository
     }
 }
