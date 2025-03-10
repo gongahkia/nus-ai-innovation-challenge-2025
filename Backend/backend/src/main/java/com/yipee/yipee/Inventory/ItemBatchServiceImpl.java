@@ -1,15 +1,15 @@
 package com.yipee.yipee.Inventory;
 
-import com.yipee.yipee.Company.Company;
-import com.yipee.yipee.Company.CompanyRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.yipee.yipee.Company.Company;
+import com.yipee.yipee.Company.CompanyRepository;
 
 @Service
 public class ItemBatchServiceImpl implements ItemBatchService {
@@ -106,15 +106,16 @@ public class ItemBatchServiceImpl implements ItemBatchService {
             throw new IllegalArgumentException("Item batch not found.");
         }
 
+
         ItemBatch itemBatch = itemBatchOptional.get();
         if (isAddition) {
             itemBatch.setQuantity(itemBatch.getQuantity() + quantity);
         } else {
-            int newQuantity = itemBatch.getQuantity() - quantity;
-            if (newQuantity < 0) {
+            int quantitySold = itemBatch.getQuantity() - quantity;
+            if (quantitySold < 0) {
                 throw new IllegalArgumentException("Quantity cannot be negative.");
             }
-            itemBatch.setQuantity(newQuantity);
+            itemBatch.setQuantity(quantitySold);
         }
         return itemBatchRepository.save(itemBatch);
     }
