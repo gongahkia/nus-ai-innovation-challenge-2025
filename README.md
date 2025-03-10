@@ -2,9 +2,11 @@
 1. mvn clean install (in the backend directory with the pom.xml file)
 2. mvn spring-boot:run
 Note: Lombok is a bit of a pain to configure. Ensure that annotations are enabled and that your IDE settings.json have Lombok enabled. Here is an example of the line to add to settings.json if your Lombok is misbehaving:
-$         "java.jdt.ls.lombokSupport.enabled": true,
-$   "java.jdt.ls.vmargs": "-javaagent:<c:\\miya stuff\\lombok.jar>"
-   
+
+```console
+"java.jdt.ls.lombokSupport.enabled": true,
+"java.jdt.ls.vmargs": "-javaagent:<c:\\miya stuff\\lombok.jar>"
+```
 # Current outstanding compile errors (5)
 
 SalesItemServiceImpl.java: cannot find symbol method setSalesDataId(java.lang.Long): The code is trying to call setSalesDataId on a SalesItem object, but this method doesn't exist. This is often caused by how you're managing the relationship between SalesItem and SalesData combined with a potential issue with Lombok not generating the method.
