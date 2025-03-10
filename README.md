@@ -1,3 +1,17 @@
+#Current outstanding compile errors
+
+SalesItemServiceImpl.java: cannot find symbol method setSalesDataId(java.lang.Long): The code is trying to call setSalesDataId on a SalesItem object, but this method doesn't exist. This is often caused by how you're managing the relationship between SalesItem and SalesData combined with a potential issue with Lombok not generating the method.
+
+SalesItemServiceImpl.java: cannot find symbol method getItems(): The code attempts to call getItems() on a SalesData object, but this method is missing from the SalesData class.
+
+SalesDataServiceImpl.java: com.yipee.yipee.SalesData.SalesDataServiceImpl is not abstract and does not override abstract method finaliseSalesData(java.lang.Long) in com.yipee.yipee.SalesData.SalesDataService: The SalesDataServiceImpl class is missing the implementation for the finaliseSalesData method that's defined in the SalesDataService interface.
+
+SalesDataServiceImpl.java: method does not override or implement a method from a supertype: There's a method in SalesDataServiceImpl marked with @Override, but it doesn't actually override anything.
+
+SalesDataController.java: 'void' type not allowed here: The code on line 58 in SalesDataController.java attempts to use a void method in a context where a value is expected (e.g., assigning the result to a variable).
+
+
+
 # `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
 
 ## Frontend
