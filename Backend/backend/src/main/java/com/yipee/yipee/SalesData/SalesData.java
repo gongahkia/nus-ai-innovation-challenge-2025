@@ -1,5 +1,8 @@
 package com.yipee.yipee.SalesData;
 
+import com.yipee.yipee.Company.Company;
+import com.yipee.yipee.SalesItem.SalesItem;
+
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -15,11 +18,14 @@ public class SalesData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long companyId;
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
+
     private LocalDateTime dateTime;
     private double amount;
 
-    @OneToMany(mappedBy = "salesData")
+    @OneToMany(mappedBy = "salesData", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SalesItem> salesItems;
 
     @Column(nullable = false)

@@ -25,7 +25,7 @@ public class SalesDataController {
         Company company = companyService.getCompanyById(companyId);
         salesData.setCompany(company);
 
-        return ResponseEntity.ok(salesDataService.addSalesDataByCompany(salesData));
+        return ResponseEntity.ok(salesDataService.addSalesDataByCompany(salesData, companyId));
     }
 
     @PutMapping("/{salesDataId}")

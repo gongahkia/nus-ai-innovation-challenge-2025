@@ -1,8 +1,16 @@
 package com.yipee.yipee.SalesItem;
 
+import com.yipee.yipee.Inventory.ItemBatchService;
+import com.yipee.yipee.SalesData.SalesDataRepository;
+import com.yipee.yipee.SalesData.SalesData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class SalesItemServiceImpl implements SalesItemService {
@@ -19,7 +27,7 @@ public class SalesItemServiceImpl implements SalesItemService {
     @Override
     public SalesItem addSalesItemToSalesData(SalesItem salesItem, Long salesDataId) {
         salesItem.setSalesDataId(salesDataId);
-        salesItemsDatabase.add(salesItem);
+        salesItemsRepository.add(salesItem);
         return salesItem;
     }
 
@@ -54,9 +62,17 @@ public class SalesItemServiceImpl implements SalesItemService {
         }).orElseThrow(() -> new IllegalArgumentException("Sales item not found"));
     }
 
-
     @Override
-    public void deleteSalesItem(Long id) {
+    public void deleteSalesItem(Long salesItemId, Long salesDataId) {
+        SalesItem salesItem = getSalesItemById(salesItemId);
+        if (salesItem.getSalesData().isEnded()) {
+            throw new IllegalStateException("Sales data is finalized and cannot be modified.");
+        }
+        salesDataRepository.findById(salesDataId).map(salesData -> {
+            salesData.getItems().remove(salesItem);
+            salesDataRepository.save(salesData);
+            return salesItem;
+        }).orElseThrow(() -> new IllegalArgumentException("Sales data not found"));
         salesItemRepository.deleteById(id);
     }
 
@@ -69,12 +85,11 @@ public class SalesItemServiceImpl implements SalesItemService {
     @Override
     public List<SalesItem> getSalesItemsBySalesDataId(Long salesDataId) {
         List<SalesItem> itemsForSalesData = new ArrayList<>();
-        for (SalesItem item : salesItemsDatabase) {
-            if (item.getSalesDataId().equals(salesDataId)) {
+        for (SalesItem item : salesItemsRepository.findAll()) {
+            if (item.getSalesData.getId().equals(salesDataId)) {
                 itemsForSalesData.add(item);
             }
         }
         return itemsForSalesData;
     }
-
 }

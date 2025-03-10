@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -49,7 +49,7 @@ public class SalesItemController {
                                                 @PathVariable Long salesDataId,
                                                 @PathVariable Long salesItemId) {
         try {
-            salesItemService.deleteSalesItem(salesItemId);
+            salesItemService.deleteSalesItem(salesItemId, salesDataId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); // No content as response
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Item not found

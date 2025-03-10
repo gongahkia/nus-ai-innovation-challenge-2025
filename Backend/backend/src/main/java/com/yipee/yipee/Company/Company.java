@@ -1,18 +1,11 @@
-package com.yippee.yipee.Company;
+package com.yipee.yipee.Company;
+
 import com.yipee.yipee.Inventory.ItemBatch;
 import com.yipee.yipee.SalesData.SalesData;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,15 +13,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class Company {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String industry;
     private String address;
 
-    @OneToMany(mappedBy = "company")
-    private ItemBatch itemBatches;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemBatch> itemBatches;
 
-    @OneToMany(mappedBy = "company")
-    private SalesData salesData;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SalesData> salesData;
+
 }

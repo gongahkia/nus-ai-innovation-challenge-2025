@@ -2,6 +2,11 @@ package com.yipee.yipee.SalesData;
 
 import com.yipee.yipee.Inventory.ItemBatch;
 import com.yipee.yipee.Inventory.ItemBatchService;
+import com.yipee.yipee.Company.Company;
+import com.yipee.yipee.SalesItem.SalesItem;
+import com.yipee.yipee.SalesItem.SalesItemRepository;
+import com.yipee.yipee.Company.CompanyRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,10 +17,13 @@ import java.util.List;
 public class SalesDataServiceImpl implements SalesDataService {
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private SalesDataRepository salesDataRepository;
 
     @Autowired
-    private SalesDataItemRepository salesDataItemRepository;
+    private SalesItemRepository salesItemRepository;
 
     @Autowired
     private ItemBatchService itemBatchService; // Use the service to change stock after one transaction is made
@@ -23,19 +31,24 @@ public class SalesDataServiceImpl implements SalesDataService {
     @Transactional
     @Override
     public SalesData addSalesDataByCompany(SalesData salesData, Long companyId) {
-        salesData.setCompany(new Company(companyId));
+        Company company = companyRepository.findById(companyId)
+            .orElseThrow(() -> new IllegalArgumentException("Company not found."));
+        
+        salesData.setCompany(company);
+
         salesData.setDateTime(LocalDateTime.now());
 
-        for (SalesDataItem item : salesData.getItems()) {
+        for (SalesItem item : salesData.getSalesItems()) {
             ItemBatch batch = item.getItemBatch();
 
             // Deduct stock using the ItemBatchService method
             itemBatchService.updateItemQuantity(batch.getId(), item.getQuantitySold(), false);
 
-            // Link SalesDataItem to SalesData
+            // Link SalesItem to SalesData
             item.setSalesData(salesData);
         }
-        
+    
+
         return salesDataRepository.save(salesData);
     }
 
@@ -52,19 +65,19 @@ public class SalesDataServiceImpl implements SalesDataService {
             }
 
             // Restore the stock before updating
-            for (SalesDataItem item : existingData.getItems()) {
+            for (SalesItem item : existingData.getSalesItems()) {
                 itemBatchService.updateItemQuantity(item.getItemBatch().getId(), item.getQuantitySold(), true);
             }
 
-            // Remove old SalesDataItems and replace them
-            salesDataItemRepository.deleteAll(existingData.getItems());
-            existingData.getItems().clear();
+            // Remove old SalesItems and replace them
+            salesItemRepository.deleteAll(existingData.getSalesItems());
+            existingData.getSalesItems().clear();
 
-            // Deduct stock again for new SalesDataItems
-            for (SalesDataItem newItem : updatedSalesData.getItems()) {
+            // Deduct stock again for new SalesItems
+            for (SalesItem newItem : updatedSalesData.getSalesItems()) {
                 itemBatchService.updateItemQuantity(newItem.getItemBatch().getId(), newItem.getQuantitySold(), false);
                 newItem.setSalesData(existingData);
-                existingData.getItems().add(newItem);
+                existingData.getSalesItems().add(newItem);
             }
 
             existingData.setDateTime(updatedSalesData.getDateTime());
@@ -87,7 +100,7 @@ public class SalesDataServiceImpl implements SalesDataService {
     public void deleteSalesData(Long id) {
         salesDataRepository.findById(id).ifPresent(salesData -> {
             // Restore stock before deleting
-            for (SalesDataItem item : salesData.getItems()) {
+            for (SalesItem item : salesData.getSalesItems()) {
                 itemBatchService.updateItemQuantity(item.getItemBatch().getId(), item.getQuantitySold(), true);
             }
 

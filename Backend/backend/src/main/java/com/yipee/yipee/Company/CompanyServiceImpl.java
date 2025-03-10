@@ -1,17 +1,12 @@
 package com.yipee.yipee.Company;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-// import com.yipee.yipee.Inventory.ItemBatch;
-// import com.yipee.yipee.Inventory.ItemBatchRepository;
-// import com.yipee.yipee.SalesData.SalesData;
-// import com.yipee.yipee.SalesData.SalesDataRepository;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    // private ItemBatchRepository itemBatchRepository;
-    // private SalesDataRepository salesDataRepository;
+    @Autowired
     private CompanyRepository companyRepository;
 
     @Override
@@ -24,7 +19,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company updateCompany(Long id, Company updatedCompany) {
-        if(id == null || updatedCompany == null) {
+        if (id == null || updatedCompany == null) {
             throw new IllegalArgumentException("id and updatedCompany cannot be null");
         }
         Company company = companyRepository.findById(id).orElse(null);
@@ -34,5 +29,9 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.save(company);
     }
 
-    
+    @Override
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Company not found"));
+    }
 }
