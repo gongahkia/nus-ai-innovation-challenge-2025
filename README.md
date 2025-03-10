@@ -1,4 +1,11 @@
-# Current outstanding compile errors
+# How to test backend:
+1. mvn clean install (in the backend directory with the pom.xml file)
+2. mvn spring-boot:run
+Note: Lombok is a bit of a pain to configure. Ensure that annotations are enabled and that your IDE settings.json have Lombok enabled. Here is an example of the line to add to settings.json if your Lombok is misbehaving:
+$         "java.jdt.ls.lombokSupport.enabled": true,
+$   "java.jdt.ls.vmargs": "-javaagent:<c:\\miya stuff\\lombok.jar>"
+   
+# Current outstanding compile errors (5)
 
 SalesItemServiceImpl.java: cannot find symbol method setSalesDataId(java.lang.Long): The code is trying to call setSalesDataId on a SalesItem object, but this method doesn't exist. This is often caused by how you're managing the relationship between SalesItem and SalesData combined with a potential issue with Lombok not generating the method.
 
@@ -10,7 +17,11 @@ SalesDataServiceImpl.java: method does not override or implement a method from a
 
 SalesDataController.java: 'void' type not allowed here: The code on line 58 in SalesDataController.java attempts to use a void method in a context where a value is expected (e.g., assigning the result to a variable).
 
-
+# To do for backend
+1. Ensure Firebase can be used for shopkeepers to login and keep track of their data.
+2. Conduct EDA on test batches of data in real-time and check results
+3. Parse these results into natural language to be easily understood by users as well as with graphs (numpy implementation would do the trick)
+   
 
 # `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
 
