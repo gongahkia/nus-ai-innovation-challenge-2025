@@ -1,4 +1,4 @@
-#Current outstanding compile errors
+# Current outstanding compile errors
 
 SalesItemServiceImpl.java: cannot find symbol method setSalesDataId(java.lang.Long): The code is trying to call setSalesDataId on a SalesItem object, but this method doesn't exist. This is often caused by how you're managing the relationship between SalesItem and SalesData combined with a potential issue with Lombok not generating the method.
 
