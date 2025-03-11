@@ -9,8 +9,23 @@
 
 ### Web
 
+Add Firebase secrets within a `.env.local`.
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=???
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=???
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=???
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=???
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=???
+NEXT_PUBLIC_FIREBASE_APP_ID=???
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=???
+```
+
+Then run the below.
+
 ```console
-$ cd yipee
+$ cd reworked-yipee/yipee-org
+$ npm install firebase date-fns recharts lucide-react
 $ npm run dev
 ```
 
