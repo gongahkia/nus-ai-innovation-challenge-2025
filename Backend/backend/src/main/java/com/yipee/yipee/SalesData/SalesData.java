@@ -6,6 +6,7 @@ import com.yipee.yipee.SalesItem.SalesItem;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,7 @@ public class SalesData {
     private double amount;
 
     @OneToMany(mappedBy = "salesData", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SalesItem> salesItems;
+    private List<SalesItem> salesItems = new ArrayList<>();
 
     @Column(nullable = false)
     @Builder.Default

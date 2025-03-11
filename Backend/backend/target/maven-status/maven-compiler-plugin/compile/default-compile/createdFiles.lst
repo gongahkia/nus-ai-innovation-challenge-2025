@@ -7,6 +7,7 @@ com\yipee\yipee\App.class
 com\yipee\yipee\Inventory\ItemBatch.class
 com\yipee\yipee\Inventory\ItemBatchController.class
 com\yipee\yipee\Company\Company$CompanyBuilder.class
+FirebaseConfig.class
 com\yipee\yipee\Inventory\ItemBatchService.class
 com\yipee\yipee\SalesItem\SalesItemController.class
 com\yipee\yipee\Company\Company.class

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public interface ItemBatchService {
     ItemBatch addItemBatchToCompany(ItemBatch itemBatch, Long companyId);
-    ItemBatch updateItemBatchToComapny(Long id, ItemBatch updatedItemBatch, Long companyId);
+    ItemBatch updateItemBatchToCompany(Long id, ItemBatch updatedItemBatch, Long companyId);
     void deleteItemBatchFromCompany(Long itemBatchId, Long companyId);
     ItemBatch getItemBatchByidFromCompany(Long itemBatchId, Long companyId);
     ItemBatch updateItemQuantity(Long id, int quantity, boolean isAddition);

@@ -1,17 +1,15 @@
 package com.yipee.yipee.SalesData;
 
-import com.yipee.yipee.Inventory.ItemBatch;
-import com.yipee.yipee.Inventory.ItemBatchService;
-import com.yipee.yipee.Company.Company;
-import com.yipee.yipee.SalesItem.SalesItem;
-import com.yipee.yipee.SalesItem.SalesItemRepository;
-import com.yipee.yipee.Company.CompanyRepository;
+import com.yipee.yipee.Inventory.*;
+import com.yipee.yipee.Company.*;
+import com.yipee.yipee.SalesItem.*;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class SalesDataServiceImpl implements SalesDataService {
@@ -24,6 +22,9 @@ public class SalesDataServiceImpl implements SalesDataService {
 
     @Autowired
     private SalesItemRepository salesItemRepository;
+
+    @Autowired
+    private ItemBatchRepository itemBatchRepository;
 
     @Autowired
     private ItemBatchService itemBatchService; // Use the service to change stock after one transaction is made
@@ -44,10 +45,22 @@ public class SalesDataServiceImpl implements SalesDataService {
             // Deduct stock using the ItemBatchService method
             itemBatchService.updateItemQuantity(batch.getId(), item.getQuantitySold(), false);
 
+            for(ItemBatch itemBatch : company.getItemBatches()) {
+                if(itemBatch.getId().equals(batch.getId())) {
+                    itemBatch.setQuantity(itemBatch.getQuantity() - item.getQuantitySold());
+                    break;
+                }
+            }
+
+            // Save the updated ItemBatch in the repository
+            itemBatchRepository.save(batch);
+
             // Link SalesItem to SalesData
             item.setSalesData(salesData);
         }
-    
+
+        company.getSalesData().add(salesData);
+        companyRepository.save(company);
 
         return salesDataRepository.save(salesData);
     }
@@ -67,31 +80,52 @@ public class SalesDataServiceImpl implements SalesDataService {
             // Restore the stock before updating
             for (SalesItem item : existingData.getSalesItems()) {
                 itemBatchService.updateItemQuantity(item.getItemBatch().getId(), item.getQuantitySold(), true);
+                // Save the updated ItemBatch in the repository
+                itemBatchRepository.save(item.getItemBatch());
             }
 
             // Remove old SalesItems and replace them
+            existingData.setSalesItems(new ArrayList<>()); // Ensure the list is mutable
             salesItemRepository.deleteAll(existingData.getSalesItems());
-            existingData.getSalesItems().clear();
 
             // Deduct stock again for new SalesItems
             for (SalesItem newItem : updatedSalesData.getSalesItems()) {
                 itemBatchService.updateItemQuantity(newItem.getItemBatch().getId(), newItem.getQuantitySold(), false);
+                // Save the updated ItemBatch in the repository
+                itemBatchRepository.save(newItem.getItemBatch());
                 newItem.setSalesData(existingData);
                 existingData.getSalesItems().add(newItem);
             }
 
             existingData.setDateTime(updatedSalesData.getDateTime());
+
+            // Update Company's sales data list
+            Company company = existingData.getCompany();
+            company.getSalesData().remove(existingData);
+            company.getSalesData().add(existingData);
+
+            // Save the updated company
+            companyRepository.save(company);
+
             return salesDataRepository.save(existingData);
         }).orElseThrow(() -> new IllegalArgumentException("Sales data not found."));
     }
 
-    //to end the transaction
     @Override
     public SalesData finalizeSalesData(Long salesDataId) {
         SalesData salesData = salesDataRepository.findById(salesDataId)
             .orElseThrow(() -> new IllegalArgumentException("Sales data not found"));
 
         salesData.setEnded(true);
+
+        // Update Company's sales data list
+        Company company = salesData.getCompany();
+        company.getSalesData().remove(salesData);
+        company.getSalesData().add(salesData);
+
+        // Save the updated company
+        companyRepository.save(company);
+
         return salesDataRepository.save(salesData);
     }
 
@@ -102,7 +136,14 @@ public class SalesDataServiceImpl implements SalesDataService {
             // Restore stock before deleting
             for (SalesItem item : salesData.getSalesItems()) {
                 itemBatchService.updateItemQuantity(item.getItemBatch().getId(), item.getQuantitySold(), true);
+                // Save the updated ItemBatch in the repository
+                itemBatchRepository.save(item.getItemBatch());
             }
+
+            // Remove SalesData from Company
+            Company company = salesData.getCompany();
+            company.getSalesData().remove(salesData);
+            companyRepository.save(company);
 
             salesDataRepository.deleteById(id);
         });

@@ -5,6 +5,7 @@ import com.yipee.yipee.SalesData.SalesData;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,9 +23,8 @@ public class Company {
     private String address;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemBatch> itemBatches;
+    private List<ItemBatch> itemBatches = new ArrayList<>();
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SalesData> salesData;
-
+    private List<SalesData> salesData = new ArrayList<>();
 }

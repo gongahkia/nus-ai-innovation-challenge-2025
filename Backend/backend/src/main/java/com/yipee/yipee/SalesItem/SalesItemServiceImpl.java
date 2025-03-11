@@ -1,8 +1,8 @@
 package com.yipee.yipee.SalesItem;
 
-import com.yipee.yipee.Inventory.ItemBatchService;
-import com.yipee.yipee.SalesData.SalesDataRepository;
-import com.yipee.yipee.SalesData.SalesData;
+import com.yipee.yipee.Inventory.*;
+import com.yipee.yipee.SalesData.*;
+import com.yipee.yipee.Company.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,13 @@ public class SalesItemServiceImpl implements SalesItemService {
     private SalesDataRepository salesDataRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private ItemBatchService itemBatchService;
+
+    @Autowired
+    private SalesDataService salesDataService;
 
     @Override
     public SalesItem addSalesItemToSalesData(SalesItem salesItem, Long salesDataId) {
@@ -30,13 +36,17 @@ public class SalesItemServiceImpl implements SalesItemService {
                 .orElseThrow(() -> new IllegalArgumentException("Sales data not found."));
         salesItem.setSalesData(salesData);
         salesData.getSalesItems().add(salesItem);
+
+        // save update the item Repository
+        salesDataService.updateSalesDataByCompany(salesData.getId(), salesData, salesData.getCompany().getId());
+        
         salesItemRepository.save(salesItem); // Use save to ensure entity persists
         return salesItem;
     }
 
     @Transactional
     @Override
-    public SalesItem updateSalesItemQuantity(Long salesItemId, int quantitySold) { //changed to match interface
+    public SalesItem updateSalesItemQuantity(Long salesItemId, int quantitySold) {
         return salesItemRepository.findById(salesItemId).map(salesItem -> {
             // Check if the SalesData is finalized
             if (salesItem.getSalesData().isEnded()) {
@@ -57,9 +67,11 @@ public class SalesItemServiceImpl implements SalesItemService {
             salesItem.setQuantitySold(quantitySold);
             SalesItem updatedItem = salesItemRepository.save(salesItem);
 
-            // Update SalesData totals
+            // Update SalesData
             SalesData salesData = salesItem.getSalesData();
-            salesDataRepository.save(salesData);
+            salesData.getSalesItems().remove(salesItem);
+            salesData.getSalesItems().add(updatedItem);
+            salesDataService.updateSalesDataByCompany(salesData.getId(), salesData, salesData.getCompany().getId());
 
             return updatedItem;
         }).orElseThrow(() -> new IllegalArgumentException("Sales item not found"));
@@ -73,7 +85,7 @@ public class SalesItemServiceImpl implements SalesItemService {
         }
         salesDataRepository.findById(salesDataId).map(salesData -> {
             salesData.getSalesItems().remove(salesItem);
-            salesDataRepository.save(salesData);
+            salesDataService.updateSalesDataByCompany(salesDataId, salesData, salesData.getCompany().getId());
             return salesItem;
         }).orElseThrow(() -> new IllegalArgumentException("Sales data not found"));
         salesItemRepository.deleteById(salesItemId);

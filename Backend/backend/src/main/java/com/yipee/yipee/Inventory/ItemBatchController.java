@@ -85,7 +85,7 @@ public class ItemBatchController {
     @PutMapping("/{id}")
     public ResponseEntity<ItemBatch> updateItemBatch(@PathVariable Long companyId, @PathVariable Long id, @RequestBody ItemBatch updatedItemBatch) {
         try {
-            ItemBatch savedItemBatch = itemBatchService.updateItemBatchToComapny(id, updatedItemBatch, companyId);
+            ItemBatch savedItemBatch = itemBatchService.updateItemBatchToCompany(id, updatedItemBatch, companyId);
             return ResponseEntity.ok(savedItemBatch);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();

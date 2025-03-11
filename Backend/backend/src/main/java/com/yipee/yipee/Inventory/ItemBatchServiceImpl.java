@@ -44,7 +44,7 @@ public class ItemBatchServiceImpl implements ItemBatchService {
     }
 
     @Override
-    public ItemBatch updateItemBatchToComapny(Long id, ItemBatch updatedItemBatch, Long companyId) {
+    public ItemBatch updateItemBatchToCompany(Long id, ItemBatch updatedItemBatch, Long companyId) {
         Optional<Company> companyOptional = companyRepository.findById(companyId);
         if (companyOptional.isEmpty()) {
             throw new IllegalArgumentException("Company not found.");

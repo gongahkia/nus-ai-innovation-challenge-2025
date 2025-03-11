@@ -1,3 +1,3 @@
-com\yipee\yipee\Test\SalesItemBatchServiceImplTest.class
-com\yipee\yipee\Test\SalesItemServiceImplTest.class
-com\yipee\yipee\Test\SalesDataServiceImplTest.class
+com\yipee\yipee\SalesData\SalesDataServiceImplTest.class
+com\yipee\yipee\Inventory\ItemBatchServiceTest.class
+com\yipee\yipee\SalesItem\SalesItemServiceTest.class

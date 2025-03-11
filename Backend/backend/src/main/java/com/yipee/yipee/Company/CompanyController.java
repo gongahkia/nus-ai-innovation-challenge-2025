@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class CompanyController {
 
     @Autowired
-    private CompanyRepository companyRepository; // Assuming you have a CompanyRepository
+    private CompanyRepository companyRepository;
 
     @PostMapping
     public ResponseEntity<Company> addCompany(@RequestBody Company company) {

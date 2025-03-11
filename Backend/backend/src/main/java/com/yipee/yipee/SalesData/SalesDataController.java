@@ -1,7 +1,6 @@
 package com.yipee.yipee.SalesData;
 
-import com.yipee.yipee.Company.Company;
-import com.yipee.yipee.Company.CompanyService;
+import com.yipee.yipee.Company.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +16,12 @@ public class SalesDataController {
     private SalesDataService salesDataService;
 
     @Autowired
-    private CompanyService companyService; // To fetch company details
+    private CompanyService companyService;
 
-    @PostMapping("")
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    @PostMapping("/new")
     public ResponseEntity<SalesData> addSalesData(@PathVariable Long companyId, @RequestBody SalesData salesData) {
         // Set the company before saving
         Company company = companyService.getCompanyById(companyId);
