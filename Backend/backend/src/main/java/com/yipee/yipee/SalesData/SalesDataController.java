@@ -54,8 +54,8 @@ public class SalesDataController {
     }
 
     @GetMapping("/{salesDataId}/finalised")
-    public ResponseEntity<SalesData> finaliseSalesData(@PathVariable Long companyId, @PathVariable Long salesDataId) {
-        return ResponseEntity.ok(salesDataService.finaliseSalesData(salesDataId));
+    public ResponseEntity<SalesData> finalizeSalesData(@PathVariable Long companyId, @PathVariable Long salesDataId) {
+        return ResponseEntity.ok(salesDataService.finalizeSalesData(salesDataId));
     }
 
     @GetMapping("/total")

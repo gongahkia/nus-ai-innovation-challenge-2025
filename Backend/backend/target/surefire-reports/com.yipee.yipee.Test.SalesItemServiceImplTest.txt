@@ -1,0 +1,53 @@
+-------------------------------------------------------------------------------
+Test set: com.yipee.yipee.Test.SalesItemServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.086 s <<< FAILURE! -- in com.yipee.yipee.Test.SalesItemServiceImplTest
+com.yipee.yipee.Test.SalesItemServiceImplTest.testDeleteSalesItem_NotFound -- Time elapsed: 0.042 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <org.springframework.dao.EmptyResultDataAccessException> but was: <java.lang.IllegalArgumentException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3111)
+	at com.yipee.yipee.Test.SalesItemServiceImplTest.testDeleteSalesItem_NotFound(SalesItemServiceImplTest.java:111)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.IllegalArgumentException: Sales item not found
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.lambda$getSalesItemById$5(SalesItemServiceImpl.java:85)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.getSalesItemById(SalesItemServiceImpl.java:85)
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.deleteSalesItem(SalesItemServiceImpl.java:70)
+	at com.yipee.yipee.Test.SalesItemServiceImplTest.lambda$testDeleteSalesItem_NotFound$3(SalesItemServiceImplTest.java:111)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+
+com.yipee.yipee.Test.SalesItemServiceImplTest.testDeleteSalesItem -- Time elapsed: 0.010 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalArgumentException: Sales item not found
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertDoesNotThrow.createAssertionFailedError(AssertDoesNotThrow.java:84)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:53)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:36)
+	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3164)
+	at com.yipee.yipee.Test.SalesItemServiceImplTest.testDeleteSalesItem(SalesItemServiceImplTest.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.IllegalArgumentException: Sales item not found
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.lambda$getSalesItemById$5(SalesItemServiceImpl.java:85)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.getSalesItemById(SalesItemServiceImpl.java:85)
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.deleteSalesItem(SalesItemServiceImpl.java:70)
+	at com.yipee.yipee.Test.SalesItemServiceImplTest.lambda$testDeleteSalesItem$2(SalesItemServiceImplTest.java:103)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:49)
+	... 6 more
+
+com.yipee.yipee.Test.SalesItemServiceImplTest.testAddSalesItemToSalesData -- Time elapsed: 0.005 s <<< ERROR!
+java.lang.IllegalArgumentException: Sales data not found.
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.lambda$addSalesItemToSalesData$0(SalesItemServiceImpl.java:30)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.yipee.yipee.SalesItem.SalesItemServiceImpl.addSalesItemToSalesData(SalesItemServiceImpl.java:30)
+	at com.yipee.yipee.Test.SalesItemServiceImplTest.testAddSalesItemToSalesData(SalesItemServiceImplTest.java:61)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

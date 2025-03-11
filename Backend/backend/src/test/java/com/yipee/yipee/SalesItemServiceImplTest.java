@@ -1,7 +1,12 @@
-package com.yipee.yipee.test;
+package com.yipee.yipee.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import com.yipee.yipee.SalesItem.*;
+import com.yipee.yipee.SalesData.*;
+import com.yipee.yipee.Inventory.*;
+import com.yipee.yipee.Company.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,7 +59,7 @@ class SalesItemServiceImplTest {
     @Test
     void testAddSalesItemToSalesData() {
         SalesItem result = salesItemService.addSalesItemToSalesData(salesItem, 1L);
-        assertEquals(1L, result.getSalesDataId());
+        assertEquals(1L, result.getSalesData().getId());
     }
 
     @Test
@@ -95,7 +100,7 @@ class SalesItemServiceImplTest {
     void testDeleteSalesItem() {
         doNothing().when(salesItemRepository).deleteById(1L);
 
-        assertDoesNotThrow(() -> salesItemService.deleteSalesItem(1L));
+        assertDoesNotThrow(() -> salesItemService.deleteSalesItem(1L, 1L));
         verify(salesItemRepository, times(1)).deleteById(1L);
     }
 
@@ -103,7 +108,7 @@ class SalesItemServiceImplTest {
     void testDeleteSalesItem_NotFound() {
         doThrow(new EmptyResultDataAccessException(1)).when(salesItemRepository).deleteById(1L);
 
-        assertThrows(EmptyResultDataAccessException.class, () -> salesItemService.deleteSalesItem(1L));
+        assertThrows(EmptyResultDataAccessException.class, () -> salesItemService.deleteSalesItem(1L, 1L));
     }
 
     @Test
@@ -129,10 +134,9 @@ class SalesItemServiceImplTest {
         List<SalesItem> mockSalesItems = new ArrayList<>();
         mockSalesItems.add(salesItem);
 
-        SalesItemServiceImpl salesItemServiceSpy = spy(salesItemService);
-        doReturn(mockSalesItems).when(salesItemServiceSpy).getSalesItemsBySalesDataId(1L);
+        when(salesItemRepository.findBySalesDataId(1L)).thenReturn(mockSalesItems);
 
-        List<SalesItem> result = salesItemServiceSpy.getSalesItemsBySalesDataId(1L);
+        List<SalesItem> result = salesItemService.getSalesItemsBySalesDataId(1L);
         assertEquals(1, result.size());
         assertEquals(1L, result.get(0).getId());
     }

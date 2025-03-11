@@ -1,7 +1,10 @@
 package com.yipee.yipee.Test;
 
-import com.yipee.yipee.Company.Company;
-import com.yipee.yipee.Company.CompanyRepository;
+import com.yipee.yipee.Company.*;
+import com.yipee.yipee.Inventory.*;
+import com.yipee.yipee.SalesData.*;
+import com.yipee.yipee.SalesItem.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ItemBatchServiceImplTest {
+class SalesItemBatchServiceImplTest {
 
     @Mock
     private ItemBatchRepository itemBatchRepository;
@@ -32,7 +35,7 @@ class ItemBatchServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        company = new Company(1L);
+        company = new Company();
         itemBatch = new ItemBatch();
         itemBatch.setId(1L);
         itemBatch.setName("Sample Item");

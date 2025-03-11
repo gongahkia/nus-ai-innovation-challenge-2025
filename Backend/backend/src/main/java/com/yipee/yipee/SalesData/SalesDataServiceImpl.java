@@ -87,12 +87,12 @@ public class SalesDataServiceImpl implements SalesDataService {
 
     //to end the transaction
     @Override
-    public void finalizeSalesData(Long salesDataId) {
+    public SalesData finalizeSalesData(Long salesDataId) {
         SalesData salesData = salesDataRepository.findById(salesDataId)
             .orElseThrow(() -> new IllegalArgumentException("Sales data not found"));
 
         salesData.setEnded(true);
-        salesDataRepository.save(salesData);
+        return salesDataRepository.save(salesData);
     }
 
     @Transactional

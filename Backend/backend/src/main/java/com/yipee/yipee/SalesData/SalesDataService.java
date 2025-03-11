@@ -13,5 +13,5 @@ public interface SalesDataService {
     int getTotalSalesByCompany(Long companyId);
     int getTotalSalesByTimeAndCompany(Long itemBatchId, LocalDateTime dateTime);
     List<SalesData> getSalesDataByDate(LocalDateTime date);
-    void finaliseSalesData(Long salesDataId);
+    SalesData finalizeSalesData(Long salesDataId);
 }

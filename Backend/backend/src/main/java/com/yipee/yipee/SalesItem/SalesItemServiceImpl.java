@@ -26,7 +26,10 @@ public class SalesItemServiceImpl implements SalesItemService {
 
     @Override
     public SalesItem addSalesItemToSalesData(SalesItem salesItem, Long salesDataId) {
-        salesItem.setSalesDataId(salesDataId);
+        SalesData salesData = salesDataRepository.findById(salesDataId)
+                .orElseThrow(() -> new IllegalArgumentException("Sales data not found."));
+        salesItem.setSalesData(salesData);
+        salesData.getSalesItems().add(salesItem);
         salesItemRepository.save(salesItem); // Use save to ensure entity persists
         return salesItem;
     }
@@ -69,7 +72,7 @@ public class SalesItemServiceImpl implements SalesItemService {
             throw new IllegalStateException("Sales data is finalized and cannot be modified.");
         }
         salesDataRepository.findById(salesDataId).map(salesData -> {
-            salesData.getItems().remove(salesItem);
+            salesData.getSalesItems().remove(salesItem);
             salesDataRepository.save(salesData);
             return salesItem;
         }).orElseThrow(() -> new IllegalArgumentException("Sales data not found"));
