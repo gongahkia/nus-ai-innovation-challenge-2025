@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, Animated, ScrollView, Button  } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Animated, ScrollView } from 'react-native';
 import { LineChart, PieChart, BarChart, ProgressChart } from 'react-native-chart-kit';
 
 const AnalyticsScreen = () => {
@@ -45,7 +45,6 @@ const AnalyticsScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-        <Button title="Back" onPress={() => navigation.goBack()} />
         <Text style={styles.title}>Your Latest Analytics</Text>
 
         {/* Line Chart */}
