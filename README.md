@@ -9,8 +9,8 @@ Submission for [NUS-GURU Network AI Innovation Challenge](https://www.sg-innovat
 
 ## Documentation
 
-* [Frontend](./Frontend)
-* [Backend](./Backend)
+* [Frontend](./Frontend/) *(React, Next.js, Vercel)*  
+* [Backend](./Backend) *(Node.js, Express.js)*  
 
 ## Team members
 

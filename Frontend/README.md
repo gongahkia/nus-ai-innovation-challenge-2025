@@ -5,9 +5,77 @@
 * React, Next.js, Vercel
 * React Native, Expo *(mobile application now deprecated)*
 
+## Screenshots
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/5.png" width="48%">
+  <img src="./../asset/6.png" width="48%">
+</div>
+<br>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/7.png" width="48%">
+  <img src="./../asset/8.png" width="48%">
+</div>
+<br>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/9.png" width="48%">
+  <img src="./../asset/10.png" width="48%">
+</div>
+<br>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/11.png" width="48%">
+  <img src="./../asset/12.png" width="48%">
+</div>
+
 ## Architecture
 
-Real-time Database schema on Firebase follows the below structure.
+### Overview
+  
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend (React/Next.js)
+    participant Firebase Auth
+    participant Firebase DB (Sales & Inventory)
+    participant Backend Server
+    participant Julius AI
+    participant ImgBB File Server
+
+    %% User Authentication
+    User ->> Frontend (React/Next.js): Login Credentials
+    Frontend (React/Next.js) ->> Firebase Auth: Authenticate User
+    Firebase Auth -->> Frontend (React/Next.js): Auth Response
+    Frontend (React/Next.js) -->> User: Login Success/Error
+
+    %% CRUD Operations on Sales & Inventory
+    User ->> Frontend (React/Next.js): Perform Sales & Inventory CRUD operations
+    Frontend (React/Next.js) ->> Firebase DB (Sales & Inventory): CRUD Requests
+    Firebase DB (Sales & Inventory) -->> Frontend (React/Next.js): CRUD Responses
+
+    %% Scheduled Data Analysis Process
+    loop Scheduled Interval
+        Backend Server ->> Firebase DB (Sales & Inventory): Pull Sales & Inventory Data
+        Firebase DB (Sales & Inventory) -->> Backend Server: Return Data
+        
+        Backend Server ->> Julius AI: Send Data for Analysis
+        Julius AI -->> Backend Server: Return Analyzed Data
+        
+        Backend Server ->> ImgBB File Server: Upload Analyzed Data Images
+        ImgBB File Server -->> Backend Server: Return Image URLs
+        
+        Backend Server ->> Firebase DB (Sales & Inventory): Store Image URLs for Analytics
+    end
+
+    %% Rendering Analytics on Frontend
+    Frontend (React/Next.js) ->> Firebase DB (Sales & Inventory): Request Analytics Image URLs
+    Firebase DB (Sales & Inventory) -->> Frontend (React/Next.js): Return Image URLs
+    
+    Frontend (React/Next.js) -->> User: Render Analytics Data Visualizations
+```
+
+### DB 
+
+Firebase *(real-time database)* follows the below schema.
 
 ```txt
 /users/
@@ -58,26 +126,7 @@ Real-time Database schema on Firebase follows the below structure.
          }
 ```
 
-## Screenshots
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="./../asset/5.png" width="48%">
-  <img src="./../asset/6.png" width="48%">
-</div>
-<br>
-<div style="display: flex; justify-content: space-between;">
-  <img src="./../asset/7.png" width="48%">
-  <img src="./../asset/8.png" width="48%">
-</div>
-<br>
-<div style="display: flex; justify-content: space-between;">
-  <img src="./../asset/9.png" width="48%">
-  <img src="./../asset/10.png" width="48%">
-</div>
-<br>
-<div style="display: flex; justify-content: center;">
-  <img src="./../asset/11.png" width="96%">
-</div>
 
 ## Local usage
 
