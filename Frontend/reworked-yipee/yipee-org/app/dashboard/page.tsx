@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useFirebase } from "@/lib/firebase/firebase-provider"
-import { useFirestore } from "@/lib/firebase/firestore"
+import { useRealtimeDatabase } from "@/lib/firebase/realtime-database"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "@/components/ui/chart"
@@ -11,9 +11,10 @@ import { Package, ShoppingCart, TrendingUp, DollarSign } from "lucide-react"
 
 export default function DashboardPage() {
   const { user } = useFirebase()
-  const { getInventoryItems, getSales, getTopSellingItems } = useFirestore()
+  const { getInventoryItems, useSalesRealtime, getTopSellingItems } = useRealtimeDatabase()
+
+  const { sales, loading: salesLoading } = useSalesRealtime()
   const [inventoryCount, setInventoryCount] = useState(0)
-  const [salesCount, setSalesCount] = useState(0)
   const [totalRevenue, setTotalRevenue] = useState(0)
   const [topProducts, setTopProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -24,10 +25,6 @@ export default function DashboardPage() {
         // Get inventory count
         const inventory = await getInventoryItems()
         setInventoryCount(inventory.length)
-
-        // Get sales data
-        const sales = await getSales()
-        setSalesCount(sales.length)
 
         // Calculate total revenue
         const revenue = sales.reduce((total, sale) => total + sale.total, 0)
@@ -44,10 +41,12 @@ export default function DashboardPage() {
       }
     }
 
-    fetchDashboardData()
-  }, [getInventoryItems, getSales, getTopSellingItems])
+    if (!salesLoading) {
+      fetchDashboardData()
+    }
+  }, [getInventoryItems, sales, salesLoading, getTopSellingItems])
 
-  if (loading) {
+  if (loading || salesLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="neobrutalist-card p-8">
@@ -109,7 +108,7 @@ export default function DashboardPage() {
             <CardTitle className="text-lg font-bold">Total Sales</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-black">{salesCount}</div>
+            <div className="text-4xl font-black">{sales.length}</div>
             <p className="text-muted-foreground">transactions</p>
           </CardContent>
         </Card>

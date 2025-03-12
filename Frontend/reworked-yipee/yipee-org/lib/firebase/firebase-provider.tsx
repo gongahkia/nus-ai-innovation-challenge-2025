@@ -12,7 +12,7 @@ import {
   signOut as firebaseSignOut,
   type User,
 } from "firebase/auth"
-import { getFirestore } from "firebase/firestore"
+import { getDatabase } from "firebase/database"
 import { firebaseConfig } from "./firebase-config"
 import { initializeUserData } from "./user-data-initializer"
 
@@ -25,7 +25,7 @@ let db: any
 if (typeof window !== "undefined") {
   app = initializeApp(firebaseConfig)
   auth = getAuth(app)
-  db = getFirestore(app)
+  db = getDatabase(app)
 }
 
 type FirebaseContextType = {
@@ -34,7 +34,7 @@ type FirebaseContextType = {
   signIn: (email: string, password: string) => Promise<any>
   signUp: (email: string, password: string) => Promise<any>
   signOut: () => Promise<void>
-  firestore: any
+  database: any
   userId: string | null
 }
 
@@ -96,7 +96,7 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
     signIn,
     signUp,
     signOut,
-    firestore: db,
+    database: db,
     userId,
   }
 

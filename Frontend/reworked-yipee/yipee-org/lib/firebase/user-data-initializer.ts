@@ -1,50 +1,63 @@
-import { doc, setDoc, collection, type Firestore, Timestamp } from "firebase/firestore"
+import { ref, set, update, type Database, serverTimestamp } from "firebase/database"
 
 // Sample initial inventory items
 const initialInventoryItems = [
   {
+    id: "sample-product-1",
     name: "Sample Product 1",
     price: 19.99,
     quantity: 50,
     category: "General",
     sku: "SP001",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: null, // Will be set to server timestamp
+    updatedAt: null, // Will be set to server timestamp
   },
   {
+    id: "sample-product-2",
     name: "Sample Product 2",
     price: 29.99,
     quantity: 30,
     category: "General",
     sku: "SP002",
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
+    createdAt: null, // Will be set to server timestamp
+    updatedAt: null, // Will be set to server timestamp
   },
 ]
 
 // Initialize user data structure
-export const initializeUserData = async (db: Firestore, userId: string) => {
+export const initializeUserData = async (db: Database, userId: string) => {
   try {
-    // Create user document with metadata
-    await setDoc(doc(db, "users", userId), {
-      createdAt: Timestamp.now(),
-      lastLogin: Timestamp.now(),
+    // Create user metadata
+    await set(ref(db, `users/${userId}/metadata`), {
+      createdAt: serverTimestamp(),
+      lastLogin: serverTimestamp(),
       settings: {
         businessName: "My Business",
         currency: "USD",
         taxRate: 0.0,
+        address: "",
+        phone: "",
+        email: "",
+        receiptFooter: "Thank you for your business!",
       },
     })
 
     // Create initial inventory items
-    const inventoryCollectionRef = collection(db, "users", userId, "inventory")
-    for (const item of initialInventoryItems) {
-      await setDoc(doc(inventoryCollectionRef), item)
-    }
+    const inventoryRef = ref(db, `users/${userId}/inventory`)
+    const inventoryData: Record<string, any> = {}
 
-    // Create empty sales collection
-    // We don't need to add documents, just ensuring the path exists
-    collection(db, "users", userId, "sales")
+    initialInventoryItems.forEach((item) => {
+      inventoryData[item.id] = {
+        ...item,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      }
+    })
+
+    await set(inventoryRef, inventoryData)
+
+    // Create empty sales node
+    await set(ref(db, `users/${userId}/sales`), {})
 
     console.log("User data initialized successfully")
     return true
@@ -55,15 +68,11 @@ export const initializeUserData = async (db: Firestore, userId: string) => {
 }
 
 // Function to update user's last login timestamp
-export const updateUserLastLogin = async (db: Firestore, userId: string) => {
+export const updateUserLastLogin = async (db: Database, userId: string) => {
   try {
-    await setDoc(
-      doc(db, "users", userId),
-      {
-        lastLogin: Timestamp.now(),
-      },
-      { merge: true },
-    )
+    await update(ref(db, `users/${userId}/metadata`), {
+      lastLogin: serverTimestamp(),
+    })
     return true
   } catch (error) {
     console.error("Error updating last login:", error)

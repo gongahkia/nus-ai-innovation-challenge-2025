@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
-import { useFirestore, type InventoryItem } from "@/lib/firebase/firestore"
+import { useState } from "react"
+import { useRealtimeDatabase, type InventoryItem } from "@/lib/firebase/realtime-database"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -22,10 +22,10 @@ import {
 import { Plus, Edit, Trash2, Search } from "lucide-react"
 
 export default function InventoryPage() {
-  const { getInventoryItems, addInventoryItem, updateInventoryItem, deleteInventoryItem } = useFirestore()
+  const { useInventoryItemsRealtime, addInventoryItem, updateInventoryItem, deleteInventoryItem } =
+    useRealtimeDatabase()
 
-  const [inventory, setInventory] = useState<InventoryItem[]>([])
-  const [loading, setLoading] = useState(true)
+  const { items: inventory, loading } = useInventoryItemsRealtime()
   const [searchTerm, setSearchTerm] = useState("")
 
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
@@ -41,22 +41,6 @@ export default function InventoryPage() {
     sku: "",
   })
 
-  useEffect(() => {
-    fetchInventory()
-  }, [])
-
-  const fetchInventory = async () => {
-    try {
-      setLoading(true)
-      const items = await getInventoryItems()
-      setInventory(items)
-    } catch (error) {
-      console.error("Error fetching inventory:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
@@ -71,7 +55,6 @@ export default function InventoryPage() {
       await addInventoryItem(formData)
       setIsAddDialogOpen(false)
       resetForm()
-      fetchInventory()
     } catch (error) {
       console.error("Error adding item:", error)
     }
@@ -84,7 +67,6 @@ export default function InventoryPage() {
       await updateInventoryItem(currentItem.id, formData)
       setIsEditDialogOpen(false)
       resetForm()
-      fetchInventory()
     } catch (error) {
       console.error("Error updating item:", error)
     }
@@ -96,7 +78,6 @@ export default function InventoryPage() {
     try {
       await deleteInventoryItem(currentItem.id)
       setIsDeleteDialogOpen(false)
-      fetchInventory()
     } catch (error) {
       console.error("Error deleting item:", error)
     }

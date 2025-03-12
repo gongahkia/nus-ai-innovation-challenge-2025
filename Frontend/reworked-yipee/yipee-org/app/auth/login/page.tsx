@@ -16,7 +16,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const { signIn, user, firestore } = useFirebase()
+  const { signIn, user, database } = useFirebase()
   const router = useRouter()
 
   // Redirect if already logged in
@@ -36,7 +36,7 @@ export default function LoginPage() {
 
       // Update last login timestamp
       if (userCredential.user) {
-        await updateUserLastLogin(firestore, userCredential.user.uid)
+        await updateUserLastLogin(database, userCredential.user.uid)
       }
 
       router.push("/dashboard")
