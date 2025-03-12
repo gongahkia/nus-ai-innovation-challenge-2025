@@ -49,6 +49,9 @@ Real-time Database schema on Firebase follows the below structure.
         total: number
         paymentMethod: string
         createdAt: timestamp
+
+    /analytics/
+      images: array<string>
 ```
 
 ## Screenshots
