@@ -14,6 +14,7 @@ import {
 } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 import { firebaseConfig } from "./firebase-config"
+import { initializeUserData } from "./user-data-initializer"
 
 // Initialize Firebase
 let app: any
@@ -34,6 +35,7 @@ type FirebaseContextType = {
   signUp: (email: string, password: string) => Promise<any>
   signOut: () => Promise<void>
   firestore: any
+  userId: string | null
 }
 
 const FirebaseContext = createContext<FirebaseContextType | null>(null)
@@ -49,11 +51,13 @@ export const useFirebase = () => {
 export const FirebaseProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+  const [userId, setUserId] = useState<string | null>(null)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         setUser(user)
+        setUserId(user?.uid || null)
         setLoading(false)
       })
 
@@ -65,8 +69,21 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
     return signInWithEmailAndPassword(auth, email, password)
   }
 
-  const signUp = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password)
+  const signUp = async (email: string, password: string) => {
+    try {
+      // Create the user account
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+
+      // Initialize the user's database structure
+      if (userCredential.user) {
+        await initializeUserData(db, userCredential.user.uid)
+      }
+
+      return userCredential
+    } catch (error) {
+      console.error("Error during sign up:", error)
+      throw error
+    }
   }
 
   const signOut = () => {
@@ -80,6 +97,7 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
     signUp,
     signOut,
     firestore: db,
+    userId,
   }
 
   return <FirebaseContext.Provider value={value}>{children}</FirebaseContext.Provider>

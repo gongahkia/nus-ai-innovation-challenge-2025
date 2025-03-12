@@ -43,7 +43,13 @@ export type Sale = {
 }
 
 export const useFirestore = () => {
-  const { firestore } = useFirebase()
+  const { firestore, userId } = useFirebase()
+
+  // Helper function to get user-specific collection reference
+  const getUserCollection = (collectionName: string) => {
+    if (!userId) throw new Error("User not authenticated")
+    return collection(firestore, "users", userId, collectionName)
+  }
 
   // Inventory CRUD operations
   const addInventoryItem = async (item: InventoryItem) => {
@@ -53,7 +59,8 @@ export const useFirestore = () => {
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       }
-      const docRef = await addDoc(collection(firestore, "inventory"), itemWithTimestamps)
+      const inventoryCollection = getUserCollection("inventory")
+      const docRef = await addDoc(inventoryCollection, itemWithTimestamps)
       return { id: docRef.id, ...itemWithTimestamps }
     } catch (error) {
       console.error("Error adding inventory item: ", error)
@@ -63,7 +70,8 @@ export const useFirestore = () => {
 
   const updateInventoryItem = async (id: string, item: Partial<InventoryItem>) => {
     try {
-      const itemRef = doc(firestore, "inventory", id)
+      if (!userId) throw new Error("User not authenticated")
+      const itemRef = doc(firestore, "users", userId, "inventory", id)
       const itemWithTimestamp = {
         ...item,
         updatedAt: Timestamp.now(),
@@ -78,7 +86,8 @@ export const useFirestore = () => {
 
   const deleteInventoryItem = async (id: string) => {
     try {
-      await deleteDoc(doc(firestore, "inventory", id))
+      if (!userId) throw new Error("User not authenticated")
+      await deleteDoc(doc(firestore, "users", userId, "inventory", id))
       return id
     } catch (error) {
       console.error("Error deleting inventory item: ", error)
@@ -88,7 +97,8 @@ export const useFirestore = () => {
 
   const getInventoryItems = async () => {
     try {
-      const querySnapshot = await getDocs(collection(firestore, "inventory"))
+      const inventoryCollection = getUserCollection("inventory")
+      const querySnapshot = await getDocs(inventoryCollection)
       return querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -101,7 +111,8 @@ export const useFirestore = () => {
 
   const getInventoryItem = async (id: string) => {
     try {
-      const docRef = doc(firestore, "inventory", id)
+      if (!userId) throw new Error("User not authenticated")
+      const docRef = doc(firestore, "users", userId, "inventory", id)
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
@@ -122,11 +133,15 @@ export const useFirestore = () => {
         ...sale,
         createdAt: Timestamp.now(),
       }
-      const docRef = await addDoc(collection(firestore, "sales"), saleWithTimestamp)
+
+      // Add the sale to user's sales collection
+      const salesCollection = getUserCollection("sales")
+      const docRef = await addDoc(salesCollection, saleWithTimestamp)
 
       // Update inventory quantities
       for (const item of sale.items) {
-        const inventoryRef = doc(firestore, "inventory", item.itemId)
+        if (!userId) throw new Error("User not authenticated")
+        const inventoryRef = doc(firestore, "users", userId, "inventory", item.itemId)
         const inventorySnap = await getDoc(inventoryRef)
 
         if (inventorySnap.exists()) {
@@ -147,7 +162,8 @@ export const useFirestore = () => {
 
   const getSales = async () => {
     try {
-      const q = query(collection(firestore, "sales"), orderBy("createdAt", "desc"))
+      const salesCollection = getUserCollection("sales")
+      const q = query(salesCollection, orderBy("createdAt", "desc"))
       const querySnapshot = await getDocs(q)
       return querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -165,8 +181,9 @@ export const useFirestore = () => {
       const startTimestamp = Timestamp.fromDate(startDate)
       const endTimestamp = Timestamp.fromDate(endDate)
 
+      const salesCollection = getUserCollection("sales")
       const q = query(
-        collection(firestore, "sales"),
+        salesCollection,
         where("createdAt", ">=", startTimestamp),
         where("createdAt", "<=", endTimestamp),
         orderBy("createdAt", "asc"),
@@ -221,6 +238,41 @@ export const useFirestore = () => {
     }
   }
 
+  // User settings operations
+  const getUserSettings = async () => {
+    try {
+      if (!userId) throw new Error("User not authenticated")
+      const userDocRef = doc(firestore, "users", userId)
+      const userDoc = await getDoc(userDocRef)
+
+      if (userDoc.exists()) {
+        return userDoc.data().settings || {}
+      }
+
+      return {}
+    } catch (error) {
+      console.error("Error getting user settings:", error)
+      throw error
+    }
+  }
+
+  const updateUserSettings = async (settings: any) => {
+    try {
+      if (!userId) throw new Error("User not authenticated")
+      const userDocRef = doc(firestore, "users", userId)
+
+      await updateDoc(userDocRef, {
+        settings: settings,
+        updatedAt: Timestamp.now(),
+      })
+
+      return settings
+    } catch (error) {
+      console.error("Error updating user settings:", error)
+      throw error
+    }
+  }
+
   return {
     addInventoryItem,
     updateInventoryItem,
@@ -231,5 +283,7 @@ export const useFirestore = () => {
     getSales,
     getSalesByDateRange,
     getTopSellingItems,
+    getUserSettings,
+    updateUserSettings,
   }
 }
