@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-// This file is based on the shadcn/ui toast component
 import { useEffect, useState } from "react";
 
 const TOAST_LIMIT = 5;
@@ -35,7 +34,7 @@ type ActionType = typeof actionTypes;
 type Action =
   | {
       type: ActionType["ADD_TOAST"];
-      toast: Toast; 
+      toast: Toast; // Includes 'id'
     }
   | {
       type: ActionType["UPDATE_TOAST"];
@@ -61,10 +60,7 @@ const reducer = (state: State, action: Action): State => {
     case actionTypes.ADD_TOAST:
       return {
         ...state,
-        toasts: [
-          ...state.toasts,
-          { id: generateId(), ...action.toast },
-        ].slice(-TOAST_LIMIT),
+        toasts: [...state.toasts, action.toast].slice(-TOAST_LIMIT), // Removed duplicate 'id'
       };
 
     case actionTypes.UPDATE_TOAST:
