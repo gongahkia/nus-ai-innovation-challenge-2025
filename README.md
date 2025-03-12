@@ -7,6 +7,11 @@
 
 Submission for [NUS-GURU Network AI Innovation Challenge](https://www.sg-innovationchallenge.org/Challenge).
 
+## Documentation
+
+* [Frontend](./Frontend)
+* [Backend](./Backend)
+
 ## Team members
 
 <table>
