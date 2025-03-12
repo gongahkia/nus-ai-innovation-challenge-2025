@@ -8,8 +8,8 @@ import { FirebaseProvider } from "@/lib/firebase/firebase-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Yipeeorg",
-  description: "AI-powered POS systems that fits your business needs from day 1.",
+  title: "AI POS by Yipee³",
+  description: "An AI-powered POS system that fits your business needs from day one.",
 }
 
 export default function RootLayout({

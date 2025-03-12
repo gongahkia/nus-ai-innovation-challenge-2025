@@ -57,7 +57,7 @@ export default function RegisterPage() {
         <div className="w-full max-w-md">
           <div className="neobrutalist-card p-8">
             <div className="mb-8">
-              <h1 className="text-4xl font-black mb-2">YIPEE</h1>
+              <h1 className="text-4xl font-black mb-2">AI POS by YIPEE³</h1>
               <p className="text-xl font-bold">Create your account</p>
             </div>
 
@@ -173,7 +173,7 @@ export default function RegisterPage() {
               use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use
               the service.
             </p>
-            <p className="font-bold">© 2025 YIPEE. All rights reserved.</p>
+            <p className="font-bold">© 2025 YIPEE³. All rights reserved.</p>
           </div>
         </div>
       </div>
