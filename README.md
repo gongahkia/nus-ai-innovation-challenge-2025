@@ -1,4 +1,7 @@
-# AI-Powered Checkout/POS Backend
+> [!NOTE]
+> The site is now **live** [here](https://nus-ai-innovation-challenge-2025.vercel.app)!
+
+# `Yipee` - The AI-Powered Checkout/POS Backend
 
 Submission for [NUS-GURU Network AI Innovation Challenge](https://www.sg-innovationchallenge.org/Challenge).
 
