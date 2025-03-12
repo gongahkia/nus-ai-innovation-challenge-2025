@@ -136,12 +136,37 @@ export default function SettingsPage() {
                   <SelectValue placeholder="Select currency" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="SGD">SGD ($)</SelectItem>
                   <SelectItem value="USD">USD ($)</SelectItem>
                   <SelectItem value="EUR">EUR (€)</SelectItem>
                   <SelectItem value="GBP">GBP (£)</SelectItem>
                   <SelectItem value="JPY">JPY (¥)</SelectItem>
                   <SelectItem value="CAD">CAD ($)</SelectItem>
                   <SelectItem value="AUD">AUD ($)</SelectItem>
+                  <SelectItem value="CHF">CHF (Fr.)</SelectItem>
+                  <SelectItem value="CNY">CNY (¥)</SelectItem>
+                  <SelectItem value="HKD">HKD ($)</SelectItem>
+                  <SelectItem value="INR">INR (₹)</SelectItem>
+                  <SelectItem value="KRW">KRW (₩)</SelectItem>
+                  <SelectItem value="BRL">BRL (R$)</SelectItem>
+                  <SelectItem value="MXN">MXN ($)</SelectItem>
+                  <SelectItem value="ZAR">ZAR (R)</SelectItem>
+                  <SelectItem value="SEK">SEK (kr)</SelectItem>
+                  <SelectItem value="NOK">NOK (kr)</SelectItem>
+                  <SelectItem value="DKK">DKK (kr)</SelectItem>
+                  <SelectItem value="NZD">NZD ($)</SelectItem>
+                  <SelectItem value="TRY">TRY (₺)</SelectItem>
+                  <SelectItem value="RUB">RUB (₽)</SelectItem>
+                  <SelectItem value="PLN">PLN (zł)</SelectItem>
+                  <SelectItem value="THB">THB (฿)</SelectItem>
+                  <SelectItem value="IDR">IDR (Rp)</SelectItem>
+                  <SelectItem value="MYR">MYR (RM)</SelectItem>
+                  <SelectItem value="PHP">PHP (₱)</SelectItem>
+                  <SelectItem value="HUF">HUF (Ft)</SelectItem>
+                  <SelectItem value="CZK">CZK (Kč)</SelectItem>
+                  <SelectItem value="ILS">ILS (₪)</SelectItem>
+                  <SelectItem value="SAR">SAR (﷼)</SelectItem>
+                  <SelectItem value="AED">AED (د.إ)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
