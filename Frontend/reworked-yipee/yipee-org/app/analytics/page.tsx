@@ -3,6 +3,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"; // Import useRouter for navigation
 import { useRealtimeDatabase, type Sale } from "@/lib/firebase/realtime-database"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -159,6 +160,9 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <h1 className="text-4xl font-black">Analytics</h1>
+        <Button onClick={() => router.back()} className="neobrutalist-button bg-accent text-white">
+          Back
+        </Button>
         <Tabs value={dateRange} onValueChange={setDateRange} className="w-full md:w-auto">
           <TabsList className="neobrutalist-card p-1 bg-white">
             <TabsTrigger value="day" className="data-[state=active]:bg-primary data-[state=active]:text-white">
