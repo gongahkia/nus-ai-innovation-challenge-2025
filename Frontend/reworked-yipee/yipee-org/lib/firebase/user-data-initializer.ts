@@ -22,6 +22,16 @@ const initialInventoryItems = [
     createdAt: null, // Will be set to server timestamp
     updatedAt: null, // Will be set to server timestamp
   },
+  {
+    id: "sample-product-3",
+    name: "Sample Product 3",
+    price: 39.99,
+    quantity: 40,
+    category: "General",
+    sku: "SP003",
+    createdAt: null, // Will be set to server timestamp
+    updatedAt: null, // Will be set to server timestamp
+  }
 ]
 
 // Initialize user data structure

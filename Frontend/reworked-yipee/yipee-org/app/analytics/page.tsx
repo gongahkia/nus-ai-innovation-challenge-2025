@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useFirestore, type Sale } from "@/lib/firebase/firestore"
+import { useRealtimeDatabase, type Sale } from "@/lib/firebase/realtime-database"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -26,15 +26,19 @@ import { format, subDays, startOfDay, endOfDay, startOfWeek, endOfWeek, startOfM
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088fe", "#00C49F", "#FFBB28", "#FF8042"]
 
 export default function AnalyticsPage() {
-  const { getSalesByDateRange, getTopSellingItems } = useFirestore()
+  const { getSalesByDateRange, getTopSellingItems, useSalesRealtime } = useRealtimeDatabase()
+  const { sales: allSales, loading: salesLoading } = useSalesRealtime()
+
   const [loading, setLoading] = useState(true)
   const [salesData, setSalesData] = useState<Sale[]>([])
   const [topProducts, setTopProducts] = useState<any[]>([])
   const [dateRange, setDateRange] = useState("week")
 
   useEffect(() => {
+    if (salesLoading) return
+
     fetchAnalyticsData()
-  }, [dateRange])
+  }, [dateRange, salesLoading, allSales])
 
   const fetchAnalyticsData = async () => {
     try {
@@ -66,9 +70,19 @@ export default function AnalyticsPage() {
           endDate = now
       }
 
-      // Fetch sales data for the selected period
-      const sales = await getSalesByDateRange(startDate, endDate)
-      setSalesData(sales)
+      // Filter sales data for the selected period
+      // For simplicity, we'll filter the already loaded sales data client-side
+      // In a production app, you might want to use the getSalesByDateRange function
+      // which would be more efficient for large datasets
+      const filteredSales = allSales.filter((sale) => {
+        if (!sale.createdAt) return false
+
+        const saleDate = typeof sale.createdAt === "number" ? new Date(sale.createdAt) : new Date(sale.createdAt)
+
+        return saleDate >= startDate && saleDate <= endDate
+      })
+
+      setSalesData(filteredSales)
 
       // Fetch top selling products
       const topItems = await getTopSellingItems(5)
@@ -88,7 +102,10 @@ export default function AnalyticsPage() {
     salesData.forEach((sale) => {
       if (!sale.createdAt) return
 
-      const date = format(sale.createdAt.toDate(), "MMM dd")
+      // Handle different timestamp formats
+      const saleDate = typeof sale.createdAt === "number" ? new Date(sale.createdAt) : new Date(sale.createdAt)
+
+      const date = format(saleDate, "MMM dd")
 
       if (!salesByDay[date]) {
         salesByDay[date] = {
@@ -158,7 +175,7 @@ export default function AnalyticsPage() {
         </Tabs>
       </div>
 
-      {loading ? (
+      {loading || salesLoading ? (
         <div className="flex items-center justify-center min-h-[40vh]">
           <div className="neobrutalist-card p-8">
             <h2 className="text-2xl font-bold mb-4">Loading analytics data...</h2>

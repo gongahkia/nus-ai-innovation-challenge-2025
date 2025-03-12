@@ -40,7 +40,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/dashboard" className="font-black text-2xl">
-            NEOPOS
+            YIPEE
           </Link>
 
           {/* Mobile menu button */}

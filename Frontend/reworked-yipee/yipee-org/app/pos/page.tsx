@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useFirestore, type InventoryItem, type Sale } from "@/lib/firebase/firestore"
+import { useState } from "react"
+import { useRealtimeDatabase, type InventoryItem, type Sale } from "@/lib/firebase/realtime-database"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -20,35 +20,18 @@ type CartItem = {
 }
 
 export default function POSPage() {
-  const { getInventoryItems, addSale } = useFirestore()
+  const { useInventoryItemsRealtime, addSale } = useRealtimeDatabase()
+  const { items: inventory, loading } = useInventoryItemsRealtime()
   const router = useRouter()
 
-  const [inventory, setInventory] = useState<InventoryItem[]>([])
-  const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
   const [cart, setCart] = useState<CartItem[]>([])
   const [paymentMethod, setPaymentMethod] = useState("cash")
   const [isCheckoutDialogOpen, setIsCheckoutDialogOpen] = useState(false)
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false)
 
-  useEffect(() => {
-    fetchInventory()
-  }, [])
-
-  const fetchInventory = async () => {
-    try {
-      setLoading(true)
-      const items = await getInventoryItems()
-      setInventory(items)
-    } catch (error) {
-      console.error("Error fetching inventory:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const addToCart = (item: InventoryItem) => {
-    if (item.quantity <= 0) return
+    if (!item.id || item.quantity <= 0) return
 
     const existingItemIndex = cart.findIndex((cartItem) => cartItem.itemId === item.id)
 
@@ -64,7 +47,7 @@ export default function POSPage() {
       setCart([
         ...cart,
         {
-          itemId: item.id!,
+          itemId: item.id,
           name: item.name,
           price: item.price,
           quantity: 1,

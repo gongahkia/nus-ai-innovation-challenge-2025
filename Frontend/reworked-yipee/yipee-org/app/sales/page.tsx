@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useFirestore, type Sale } from "@/lib/firebase/firestore"
+import { useState } from "react"
+import { useRealtimeDatabase, type Sale } from "@/lib/firebase/realtime-database"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -11,28 +11,12 @@ import { Search, FileText, Calendar } from "lucide-react"
 import { format } from "date-fns"
 
 export default function SalesPage() {
-  const { getSales } = useFirestore()
-  const [sales, setSales] = useState<Sale[]>([])
-  const [loading, setLoading] = useState(true)
+  const { useSalesRealtime } = useRealtimeDatabase()
+  const { sales, loading } = useSalesRealtime()
+
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedSale, setSelectedSale] = useState<Sale | null>(null)
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false)
-
-  useEffect(() => {
-    fetchSales()
-  }, [])
-
-  const fetchSales = async () => {
-    try {
-      setLoading(true)
-      const salesData = await getSales()
-      setSales(salesData)
-    } catch (error) {
-      console.error("Error fetching sales:", error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const openSaleDetails = (sale: Sale) => {
     setSelectedSale(sale)
@@ -43,7 +27,11 @@ export default function SalesPage() {
     if (!timestamp) return "N/A"
 
     try {
-      const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp)
+      // Handle both Firebase server timestamp and regular Date objects
+      const date =
+        typeof timestamp === "object" && timestamp !== null && "toDate" in timestamp
+          ? timestamp.toDate()
+          : new Date(timestamp)
       return format(date, "MMM d, yyyy h:mm a")
     } catch (error) {
       console.error("Error formatting date:", error)

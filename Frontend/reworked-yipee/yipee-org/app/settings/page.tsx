@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
-import { useFirestore } from "@/lib/firebase/firestore"
+import { useRealtimeDatabase } from "@/lib/firebase/realtime-database"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -22,7 +22,7 @@ type UserSettings = {
 }
 
 export default function SettingsPage() {
-  const { getUserSettings, updateUserSettings } = useFirestore()
+  const { getUserSettings, updateUserSettings } = useRealtimeDatabase()
   const { toast } = useToast()
   const [settings, setSettings] = useState<UserSettings>({
     businessName: "",
