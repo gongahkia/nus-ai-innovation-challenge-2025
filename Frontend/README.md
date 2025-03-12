@@ -51,7 +51,9 @@ Real-time Database schema on Firebase follows the below structure.
 * React, Next.js, Vercel
 * React Native, Expo *(mobile application now deprecated)*
 
-## Usage
+## Local usage
+
+For debugging purposes.
 
 ### Web application
 
