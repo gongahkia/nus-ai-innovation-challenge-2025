@@ -3,51 +3,55 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 350 100% 60%;
+    --background: 210 20% 98%; /* Soft off-white */
+    --foreground: 210 10% 15%; /* Dark slate gray */
+    --card: 210 20% 100%; /* Pure white */
+    --card-foreground: 210 10% 15%;
+    --popover: 210 20% 98%;
+    --popover-foreground: 210 10% 15%;
+    --primary: 210 80% 50%; /* Deep sky blue */
     --primary-foreground: 0 0% 98%;
-    --secondary: 60 100% 50%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 240 100% 60%;
+    --secondary: 340 80% 60%; /* Soft magenta */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 210 15% 92%; /* Muted grayish blue */
+    --muted-foreground: 210 10% 50%;
+    --accent: 45 100% 55%; /* Warm gold */
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 70% 50%; /* Vivid red */
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-  }
+    --border: 210 10% 85%; /* Light gray border */
+    --input: 210 10% 85%;
+    --ring: 340 80% 60%; /* Magenta ring for focus states */
+    --radius: .5rem;
+   }
 
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 350 100% 60%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 60 100% 50%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 240 100% 60%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-  }
+   .dark {
+     --background:210,10%,10%; /* Dark slate background */
+     --foreground:210,20%,95%; /* Near-white foreground */
+     --card:210,15%,12%;
+     --card-foreground:0,0%,98%;
+     --popover:210,20%,10%;
+     --popover-foreground:0,0%,98%;
+     --primary:340,80%,60%;/* Soft magenta in dark mode */
+     --primary-foreground:0,0%,98%;
+     --secondary:200,90%,65%;/* Cyan accent */
+     --secondary-foreground:0,0%,98%;
+     --muted:210,15%,20%;
+     --muted-foreground:210,10%,70%;
+     --accent:40,90%,60%;/* Bright amber accent */
+     --accent-foreground:0,0%,98%;
+     --destructive:350,90%,55%;/* Strong red in dark mode */
+     --destructive-foreground:0,0%,98%;
+     --border:210,10%,25%;
+     --input:210,10%,25%;
+     --ring:200,100%,65%;/* Electric cyan ring in dark mode */
+     --radius:.5rem;
+   }
+
+   .dark {
+      /* Dark mode colors already defined above; no changes needed here. */
+   }
 }
-
 
 @layer utilities {
   .border-border {
