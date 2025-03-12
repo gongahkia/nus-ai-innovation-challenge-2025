@@ -1,5 +1,10 @@
 # AI-Powered Checkout/POS Frontend
 
+## Stack
+
+* React, Next.js, Vercel
+* React Native, Expo *(mobile application now deprecated)*
+
 ## Architecture
 
 Real-time Database schema on Firebase follows the below structure.
@@ -46,10 +51,26 @@ Real-time Database schema on Firebase follows the below structure.
         createdAt: timestamp
 ```
 
-## Stack
+## Screenshots
 
-* React, Next.js, Vercel
-* React Native, Expo *(mobile application now deprecated)*
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/5.png" width="48%">
+  <img src="./../asset/6.png" width="48%">
+</div>
+<br>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/7.png" width="48%">
+  <img src="./../asset/8.png" width="48%">
+</div>
+<br>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./../asset/9.png" width="48%">
+  <img src="./../asset/10.png" width="48%">
+</div>
+<br>
+<div style="display: flex; justify-content: center;">
+  <img src="./../asset/11.png" width="96%">
+</div>
 
 ## Local usage
 
@@ -79,15 +100,3 @@ $ npm run dev
 ```
 
 View the site at [http://localhost:3000](http://localhost:3000).
-
-## Screenshots
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="./../asset/5.png" width="48%">
-  <img src="./../asset/6.png" width="48%">
-</div>
-<br>
-<div style="display: flex; justify-content: space-between;">
-  <img src="./../asset/7.png" width="48%">
-  <img src="./../asset/8.png" width="48%">
-</div>
