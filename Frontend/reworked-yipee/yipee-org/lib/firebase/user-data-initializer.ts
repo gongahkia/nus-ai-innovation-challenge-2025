@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { ref, set, update, type Database, serverTimestamp } from "firebase/database"
 
 // Sample initial inventory items

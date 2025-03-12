@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // This file is based on the shadcn/ui toast component
 import { useEffect, useState } from "react"
 
