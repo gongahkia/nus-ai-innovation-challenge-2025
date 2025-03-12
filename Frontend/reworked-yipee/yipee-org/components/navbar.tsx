@@ -22,6 +22,7 @@ export default function Navbar() {
     { href: "/pos", label: "POS" },
     { href: "/sales", label: "Sales" },
     { href: "/analytics", label: "Analytics" },
+    { href: "/settings", label: "Settings" },
   ]
 
   const handleSignOut = async () => {
