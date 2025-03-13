@@ -5,12 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/company")
 public class CompanyController {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private CompanyService companyService;
 
     @PostMapping
     public ResponseEntity<Company> addCompany(@RequestBody Company company) {
@@ -39,4 +43,19 @@ public class CompanyController {
         // Return the updated company
         return ResponseEntity.ok(savedCompany);
     }
+
+    @GetMapping("/{companyId}/export/sales-data")
+    public ResponseEntity<String> exportSalesDataToCSV(@PathVariable Long companyId) {
+        companyService.exportSalesDataToCSV(companyId);
+        return ResponseEntity.ok("SalesData data exported to CSV.");
+    }
+
+    @GetMapping("/export/all-sales-data")
+    public ResponseEntity<String> exportAllSalesDataToCSV() {
+        companyService.exportAllSalesDataToCSV();
+        return ResponseEntity.ok("AllSalesData data exported to CSV.");
+    }
+
+
+
 }

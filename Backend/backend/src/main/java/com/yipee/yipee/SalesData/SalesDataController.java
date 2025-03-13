@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,33 +48,41 @@ public class SalesDataController {
     public ResponseEntity<List<SalesData>> getSalesDataByCompany(@PathVariable Long companyId) {
         return ResponseEntity.ok(salesDataService.getSalesDataByCompany(companyId));
     }
-
-    @GetMapping("/batch/{itemBatchId}/time/{dateTime}")
-    public ResponseEntity<List<SalesData>> getSalesDataByTimeAndCompany(@PathVariable Long companyId,
-                                                                        @PathVariable Long itemBatchId,
-                                                                        @PathVariable LocalDateTime dateTime) {
-        return ResponseEntity.ok(salesDataService.getSalesDataByTimeAndCompany(itemBatchId, dateTime));
-    }
-
-    @GetMapping("/{salesDataId}/finalised")
-    public ResponseEntity<SalesData> finalizeSalesData(@PathVariable Long companyId, @PathVariable Long salesDataId) {
-        return ResponseEntity.ok(salesDataService.finalizeSalesData(salesDataId));
-    }
-
-    @GetMapping("/total")
-    public ResponseEntity<Integer> getTotalSalesByCompany(@PathVariable Long companyId) {
-        return ResponseEntity.ok(salesDataService.getTotalSalesByCompany(companyId));
-    }
-
-    @GetMapping("/batch/{itemBatchId}/time/{dateTime}/total")
-    public ResponseEntity<Integer> getTotalSalesByTimeAndCompany(@PathVariable Long companyId,
-                                                                  @PathVariable Long itemBatchId,
-                                                                  @PathVariable LocalDateTime dateTime) {
-        return ResponseEntity.ok(salesDataService.getTotalSalesByTimeAndCompany(itemBatchId, dateTime));
-    }
-
+    
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<SalesData>> getSalesDataByDate(@PathVariable LocalDateTime date) {
-        return ResponseEntity.ok(salesDataService.getSalesDataByDate(date));
+    public ResponseEntity<List<SalesData>> getSalesDataByDateAndCompany(
+            @PathVariable Long companyId, 
+            @PathVariable String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        List<SalesData> salesDataList = salesDataService.getSalesDataByDateandCompany(companyId, localDate);
+        return ResponseEntity.ok(salesDataList);
     }
+
+    @GetMapping("/total-sales")
+    public ResponseEntity<Double> getTotalSalesByCompany(@PathVariable Long companyId) {
+        double totalSales = salesDataService.getTotalSalesByCompany(companyId);
+        return ResponseEntity.ok(totalSales);
+    }
+
+    @GetMapping("/total-sales/date/{date}")
+    public ResponseEntity<Double> getTotalSalesByDateAndCompany(
+            @PathVariable Long companyId, 
+            @PathVariable String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        double totalSales = salesDataService.getTotalSalesByDateAndCompany(companyId, localDate);
+        return ResponseEntity.ok(totalSales);
+    }
+
+    @PutMapping("/{salesDataId}/finalised")
+    public ResponseEntity<SalesData> finalizeSalesData(@PathVariable Long salesDataId) {
+        SalesData finalizedSalesData = salesDataService.finalizeSalesData(salesDataId);
+        return ResponseEntity.ok(finalizedSalesData);
+    }
+
+    @GetMapping("/top-item")
+    public ResponseEntity<String> getTopSalesItemByCompany(@PathVariable Long companyId) {
+        String topItem = salesDataService.getTopSalesItemByCompany(companyId);
+        return ResponseEntity.ok(topItem);
+    }
+
 }
