@@ -50,6 +50,12 @@ public class CompanyController {
         return ResponseEntity.ok("SalesData data exported to CSV.");
     }
 
+    @GetMapping("/{companyId}/export/item-batch")
+    public ResponseEntity<String> exportItemBatchToCSV(@PathVariable Long companyId) {
+        companyService.exportItemBatchToCSV(companyId);
+        return ResponseEntity.ok("SalesData data exported to CSV.");
+    }
+
     @GetMapping("/export/all-sales-data")
     public ResponseEntity<String> exportAllSalesDataToCSV() {
         companyService.exportAllSalesDataToCSV();

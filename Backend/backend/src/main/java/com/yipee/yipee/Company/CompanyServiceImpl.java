@@ -42,7 +42,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void exportSalesDataToCSV(Long companyId) {
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new IllegalArgumentException("Company not found"));
         DatabaseToCSVExporter.exportSalesDataToCSV(companyId);
+    }
+
+    @Override
+    public void exportItemBatchToCSV(Long companyId){
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new IllegalArgumentException("Company not found"));
+        DatabaseToCSVExporter.exportItemBatchToCSV(companyId);
     }
 
     @Override
