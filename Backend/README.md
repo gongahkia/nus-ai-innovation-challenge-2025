@@ -1,3 +1,9 @@
+# To do for backend
+
+1. Write function to parse sales data, etc into csv.
+2. Write tests to walk through a typical monthly sales report for a business
+3. Test inputs with csv files with said rigorous tests
+
 # AI-Powered Checkout/POS Backend
 
 Bringing industry insights to your doorstep
@@ -61,6 +67,19 @@ Our backend processes your POS data to provide insights on:
 - Seasonal trends
 - Local market analysis
 - Supply chain recommendations
+
+# How to test backend
+
+1. `mvn clean install` (in the backend directory with the pom.xml file)
+2. `mvn spring-boot:run`
+
+> [!NOTE]
+> Lombok is a bit of a pain to configure. Ensure that annotations are enabled and that your IDE settings.json have Lombok enabled. Here is an example of the line to add to `settings.json` if your Lombok is misbehaving.
+
+```console
+"java.jdt.ls.lombokSupport.enabled": true,
+"java.jdt.ls.vmargs": "-javaagent:<c:\\miya stuff\\lombok.jar>"
+```
 
 ## Security
 
