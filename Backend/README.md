@@ -18,7 +18,7 @@ This backend system powers an AI-driven checkout and point-of-sale (POS) solutio
 ## Getting Started
 
 1. Clone this repository
-2. Install dependencies: `npm install`
+2. Install dependencies: `npm clean install`, `mvn clean install`
 3. Set up environment variables (see `.env.example`)
 4. Run the server: `npm start`
 
