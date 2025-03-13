@@ -21,6 +21,11 @@
     </parent>
 
    <dependencies>
+   <dependency> 
+    <groupId>com.opencsv</groupId> 
+    <artifactId>opencsv</artifactId> 
+    <version>4.1</version> 
+</dependency> 
         <!-- Firebase Admin SDK -->
     <dependency>
         <groupId>com.google.firebase</groupId>
