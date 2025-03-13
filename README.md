@@ -3,9 +3,9 @@
 > [!IMPORTANT]
 > The site is now live [***here***](https://nus-ai-innovation-challenge-2025.vercel.app)!
 >  
-> Test Account Details to see data analysis
-> Email: *testuser@gmail.com*
-> Password: *testpassword*
+> **Test Account Details to see data analysis**   
+> Email: *testuser@gmail.com*  
+> Password: *testpassword*  
 
 # `Yipee³` - The AI-Powered Checkout/POS Backend
 
