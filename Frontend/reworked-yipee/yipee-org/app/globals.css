@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@layer base {
+  :root {
+    --background: 210 20% 98%; /* Soft off-white */
+    --foreground: 210 10% 15%; /* Dark slate gray */
+    --card: 210 20% 100%; /* Pure white */
+    --card-foreground: 210 10% 15%;
+    --popover: 210 20% 98%;
+    --popover-foreground: 210 10% 15%;
+    --primary: 210 80% 50%; /* Deep sky blue */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 340 80% 60%; /* Soft magenta */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 210 15% 92%; /* Muted grayish blue */
+    --muted-foreground: 210 10% 50%;
+    --accent: 45 100% 55%; /* Warm gold */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 70% 50%; /* Vivid red */
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 10% 85%; /* Light gray border */
+    --input: 210 10% 85%;
+    --ring: 340 80% 60%; /* Magenta ring for focus states */
+    --radius: .5rem;
+   }
+
+   .dark {
+     --background:210,10%,10%; /* Dark slate background */
+     --foreground:210,20%,95%; /* Near-white foreground */
+     --card:210,15%,12%;
+     --card-foreground:0,0%,98%;
+     --popover:210,20%,10%;
+     --popover-foreground:0,0%,98%;
+     --primary:340,80%,60%;/* Soft magenta in dark mode */
+     --primary-foreground:0,0%,98%;
+     --secondary:200,90%,65%;/* Cyan accent */
+     --secondary-foreground:0,0%,98%;
+     --muted:210,15%,20%;
+     --muted-foreground:210,10%,70%;
+     --accent:40,90%,60%;/* Bright amber accent */
+     --accent-foreground:0,0%,98%;
+     --destructive:350,90%,55%;/* Strong red in dark mode */
+     --destructive-foreground:0,0%,98%;
+     --border:210,10%,25%;
+     --input:210,10%,25%;
+     --ring:200,100%,65%;/* Electric cyan ring in dark mode */
+     --radius:.5rem;
+   }
+
+   .dark {
+      /* Dark mode colors already defined above; no changes needed here. */
+   }
+}
+
+@layer utilities {
+  .border-border {
+    border-color: hsl(var(--border)); /* Custom utility definition */
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Neobrutalist styles */
+.neobrutalist-card {
+  @apply bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+}
+
+.neobrutalist-button {
+  @apply font-bold border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] 
+  hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] 
+  active:shadow-none active:translate-x-[5px] active:translate-y-[5px] 
+  transition-all duration-200;
+}
+
+.neobrutalist-input {
+  @apply border-4 border-black bg-white px-4 py-2 focus:outline-none focus:ring-0 focus:border-accent;
+}
+
+.neobrutalist-container {
+  @apply p-6 md:p-8 lg:p-10 border-4 border-black bg-white;
+}

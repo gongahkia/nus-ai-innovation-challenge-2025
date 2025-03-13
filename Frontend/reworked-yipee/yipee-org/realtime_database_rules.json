@@ -1,0 +1,35 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+        
+        "inventory": {
+          "$itemId": {
+            ".validate": "newData.hasChildren(['name', 'price', 'quantity', 'category', 'sku'])",
+            "name": { ".validate": "newData.isString()" },
+            "price": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+            "quantity": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+            "category": { ".validate": "newData.isString()" },
+            "sku": { ".validate": "newData.isString()" }
+          }
+        },
+        
+        "sales": {
+          "$saleId": {
+            ".validate": "newData.hasChildren(['items', 'total', 'paymentMethod'])",
+            "total": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+            "paymentMethod": { ".validate": "newData.isString()" }
+          }
+        }
+      }
+    },
+    
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}

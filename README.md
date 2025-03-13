@@ -1,82 +1,67 @@
-# How to test backend:
-1. mvn clean install (in the backend directory with the pom.xml file)
-2. mvn spring-boot:run
-Note: Lombok is a bit of a pain to configure. Ensure that annotations are enabled and that your IDE settings.json have Lombok enabled. Here is an example of the line to add to settings.json if your Lombok is misbehaving:
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/nus-ai-innovation-challenge-2025)
 
-```console
-"java.jdt.ls.lombokSupport.enabled": true,
-"java.jdt.ls.vmargs": "-javaagent:<c:\\miya stuff\\lombok.jar>"
-```
+> [!IMPORTANT]
+> The site is now live [***here***](https://nus-ai-innovation-challenge-2025.vercel.app)!
 
-# To do for backend
-1. Write function to parse sales data, etc into csv.
-2. Write tests to walk through a typical monthly sales report for a business
-3. Test inputs with csv files with said rigorous tests
-# `Yipee! Yipee! Yipee! ᐠ( ᐛ )ᐟ`
+# `Yipee³` - The AI-Powered Checkout/POS Backend
 
-## Frontend
+Submission for [NUS-GURU Network AI Innovation Challenge](https://www.sg-innovationchallenge.org/Challenge).
 
-### Web
+## Documentation
 
-```console
-$ cd yipee
-$ npm run dev
-```
+* [Frontend](./Frontend/) *(React, Next.js, Vercel)*  
+* [Backend](./Backend) *(Node.js, Express.js)*  
 
-View the site at [http://localhost:3000](http://localhost:3000).
+## Team members
 
-### Expo
-
-```console
-$ cd yipee-native
-$ npx expo install firebase @react-navigation/native @react-navigation/stack expo-constants react-native-gesture-handler react-native-safe-area-context react-native-screens expo-camera react-native-svg expo-image-picker
-$ npm install react-native-chart-kit @react-navigation/bottom-tabs
-```
-
-* `npx expo start --clear -c --tunnel` for generic mobile build *(IOS deprecated, use the below)*
-    * `npx expo run:android` for Android build
-    * `npx expo run:ios` for IOS build
-* `npx expo start --clear -c --tunnel --web` for web debugger
-
-Scan the QR code with the [Camera](https://docs.expo.dev/versions/latest/sdk/camera/) app on IOS or the [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_SG) app on Android.
-
-## 27 Feb 2025 Call
-
-```txt
-———-—
-MOTTO: Bringing industry insights to your doorstep
-
-TARGET DEMOGRAPHIC: Small businesses (eg. Mama shop, Individual retail shops, F&B)
-
-WHY LOYVERSE IS SHIT
-- We don't take customer data
-- We just take business general transaction data 
-
-VALUE PROP
-- Plug and play solution that features many ways to feed the data into our system
-- Not invasive at all, little capital cost to adopt our system as comapred to existing competitors in the market
-- Personalised data analytics for businesses, they can save their inventory the first time and then hook everything like recording transactions to a single webapp, then prompt them when there's a lack of resources, analytics system should backend also consider factors like weather, season, locality, producer availability, social media
-- Can cross pollinate data insights across companies as well
-
-USER JOURNEY: For the company
-- Specify your industry
-- Specify your existing stock
-- Specify your POS data at the end of the day/week/month
-- We give you insights
-
-———-—
-NOW WHAT DO?
-
-Item 2
-Backend + Model training: Kamiya, Jia Lin, Nichole
-Frontend + Scanning functionality/deployment: Gabriel
-
-Item 1,3,4,5
-Astin
-Gabriel
-
-———-—
-WHEN IS DEADLINE 
-
-Checkin on 7 March Friday 
-```
+<table>
+	<tbody>
+        <tr>
+            <td align="center">
+                <a href="https://github.com/a-stint">
+                    <img src="https://avatars.githubusercontent.com/u/149822619?v=4" width="100;" alt=""/>
+                    <br />
+                    <sub><b>Astin Tay</b></sub>
+                </a>
+                <br />
+                <sub><a href="">Marketing<a></sub>
+            </td> 
+            <td align="center">
+                <a href="https://www.linkedin.com/in/gabriel-zmong/">
+                    <img src="https://avatars.githubusercontent.com/u/117062305?v=4" width="100;" alt="gongahkia"/>
+                    <br />
+                    <sub><b>Gabriel Ong</b></sub>
+                </a>
+                <br />
+                <sub><a href="./Frontend/">Frontend, DevOps<a></sub>
+            </td>
+            <td align="center">
+                <a href="https://github.com/rose-cider">
+                    <img src="https://avatars.githubusercontent.com/u/158392101?v=4" width="100;" alt=""/>
+                    <br />
+                    <sub><b>Kamiya Chang</b></sub>
+                </a>
+                <br />
+                <sub><a href="./Backend/">Backend, ML<a></sub>
+            </td>
+            <td align="center">
+                <a href="https://github.com/SJL1504">
+                    <img src="https://avatars.githubusercontent.com/u/161947563?v=4" width="100;" alt=""/>
+                    <br />
+                    <sub><b>Siah Jia Lin</b></sub>
+                </a>
+                <br />
+                <sub><a href="./Backend/">Backend, ML<a></sub>
+            </td>
+            <td align="center">
+                <a href="https://github.com/kybuno">
+                    <img src="https://avatars.githubusercontent.com/u/96574567?v=4" width="100;" alt=""/>
+                    <br />
+                    <sub><b>Nichole Bun</b></sub>
+                </a>
+                <br />
+                <sub><a href="">Data Engineering<a></sub>
+            </td>
+        </tr>
+	</tbody>
+</table>
