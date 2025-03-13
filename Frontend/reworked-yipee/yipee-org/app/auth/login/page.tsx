@@ -57,7 +57,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           <div className="neobrutalist-card p-8">
             <div className="mb-8">
-              <h1 className="text-4xl font-black mb-2">YIPEE</h1>
+              <h1 className="text-4xl font-black mb-2">AI POS by YIPEE³</h1>
               <p className="text-xl font-bold">Sign in to your account</p>
             </div>
 
@@ -125,7 +125,7 @@ export default function LoginPage() {
         <div className="neobrutalist-card p-8 max-w-md">
           <h2 className="text-2xl font-bold mb-4">Legal Disclaimer</h2>
           <div className="space-y-4">
-          <p>By accessing and using YIPEE, you agree to comply with all applicable laws and regulations.</p>
+          <p>By accessing and using AI POS by YIPEE³, you agree to comply with all applicable laws and regulations.</p>
             <p>
               All data stored in this application is subject to our privacy policy and terms of service. You are
               responsible for maintaining the confidentiality of your account information.
@@ -145,7 +145,7 @@ export default function LoginPage() {
               use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use
               the service.
             </p>
-            <p className="font-bold">© 2025 YIPEE. All rights reserved.</p>
+            <p className="font-bold">© 2025 YIPEE³. All rights reserved.</p>
           </div>
         </div>
       </div>
