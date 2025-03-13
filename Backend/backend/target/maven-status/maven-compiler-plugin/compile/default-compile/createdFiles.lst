@@ -5,6 +5,7 @@ com\yipee\yipee\SalesItem\SalesItemRepository.class
 com\yipee\yipee\SalesData\SalesData$SalesDataBuilder.class
 com\yipee\yipee\App.class
 com\yipee\yipee\Inventory\ItemBatch.class
+com\yipee\yipee\dto\AnalysisResult.class
 com\yipee\yipee\Inventory\ItemBatchController.class
 com\yipee\yipee\Company\Company$CompanyBuilder.class
 FirebaseConfig.class
@@ -18,10 +19,13 @@ com\yipee\yipee\Inventory\ItemBatch$ItemBatchBuilder.class
 com\yipee\yipee\SalesItem\SalesItemService.class
 com\yipee\yipee\Company\CompanyServiceImpl.class
 com\yipee\yipee\Company\CompanyController.class
+com\yipee\yipee\Export\DatabaseToCSVExporter.class
 com\yipee\yipee\SalesItem\SalesItemServiceImpl.class
 com\yipee\yipee\Inventory\ItemBatchRepository.class
 com\yipee\yipee\SalesData\SalesDataService.class
 com\yipee\yipee\Company\CompanyRepository.class
 com\yipee\yipee\Company\CompanyService.class
+com\yipee\yipee\dto\JuliusApiResponse.class
+com\yipee\yipee\services\JuliusAnalyticsService.class
 com\yipee\yipee\Inventory\ItemBatchServiceImpl.class
 com\yipee\yipee\SalesItem\SalesItem$SalesItemBuilder.class
